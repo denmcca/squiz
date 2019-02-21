@@ -33,7 +33,8 @@ class PageNavigation extends Component {
         <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">
-          Squiz</NavbarBrand>
+          <img src={SquizLogo} alt="Squiz" width="100"/>
+          </NavbarBrand>
           {/* <NavbarToggler onClick={this.toggle} />  not sure what this does*/}
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
