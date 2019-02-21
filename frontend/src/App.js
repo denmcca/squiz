@@ -1,26 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
-import Navigator from "./Components/Navbar";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import QuizCreation from "./QuizCreation";
 class App extends Component {
   render() {
+
     return (
       <div className="App">
-        <header className="App-header">
-          <Navigator />
-
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <QuizCreation />
       </div>
     );
   }
