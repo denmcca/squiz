@@ -1,5 +1,5 @@
 
 
 module.exports = {
-    DB: 'mongodb'
+  DB: 'mongodb+srv://admin:admin123@squiz-iyebt.mongodb.net/test?retryWrites=true'
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "../App.css";
 import {
     Collapse,
     Navbar,
@@ -12,7 +12,7 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
-import SquizLogo from '../src/squiz logo.png';
+import SquizLogo from '../squiz logo.png';
 class PageNavigation extends Component {
     constructor(props) {
         super(props);
@@ -38,6 +38,9 @@ class PageNavigation extends Component {
           {/* <NavbarToggler onClick={this.toggle} />  not sure what this does*/}
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/login">Login</NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink href="/Quizzes/">Quizzes</NavLink>
               </NavItem>
