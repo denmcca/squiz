@@ -36,10 +36,10 @@ class PageNavigation extends Component {
           <img src={SquizLogo} alt="Squiz" width="100"/>
           </NavbarBrand>
           {/* <NavbarToggler onClick={this.toggle} />  not sure what this does*/}
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse className="font1" isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/login">Login</NavLink>
+              <NavItem >
+                <NavLink className="font2" href="/login">Login</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/Quizzes/">Quizzes</NavLink>
