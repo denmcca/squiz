@@ -10,8 +10,8 @@ const validateLoginInput = require('../validation/login');
 const User = require('../models/User');
 
 router.post('/register', function (req, res) {
-  const { errors, isValid } = validateRegistyerInput(req.body);
-
+  const { errors, isValid } = validateRegisterInput(req.body);
+  console.log('User being added');
   if (!isValid) {
     return res.status(400).json(errors);
   }
