@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./App.css";
+import "../App.css";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-class QuizCreation extends Component {
+class CreateQuizPage extends Component {
   render() {
 
     return (
@@ -49,4 +49,4 @@ class QuizCreation extends Component {
   }
 }
 
-export default QuizCreation;
+export default CreateQuizPage;

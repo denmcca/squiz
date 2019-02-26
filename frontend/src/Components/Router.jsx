@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, BrowserRouter} from 'react-router-dom';
 import LoginPage from '../Pages/LoginPage';
 import HomePage from '../Pages/HomePage';
+import CreateQuizPage from '../Pages/CreateQuizPage';
 
 export default class Router extends Component {
   render() {
@@ -10,6 +11,7 @@ export default class Router extends Component {
         <div>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/login' component={LoginPage} />
+          <Route exact path='/CreateQuiz' component={CreateQuizPage} />
         </div>
       </BrowserRouter>
     )
