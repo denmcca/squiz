@@ -6,9 +6,9 @@ class CreateQuizPage extends Component {
 
     return (
       <Form>
-        <FormGroup>
+        <FormGroup style = {{marginLeft: '100px', marginRight: '100px'}}>
           <legend>Question</legend>
-          <Input type="textarea" name="question" id="question" placeholder="Question" />
+          <Input type="textarea" name="question" placeholder="Question"/>
         </FormGroup>
         <FormGroup>
           <FormText color="muted">
@@ -20,26 +20,26 @@ class CreateQuizPage extends Component {
           <FormGroup check>
             <Input type="radio" name="radio1" />{' '}
             <Label check>
-              <Input type="textarea" name="text" id="optionOne" placeholder="Option One" />
+              <Input type="textarea" name="optionOne" placeholder="Option One" style = {{width: "500px"}} />
             </Label>
           </FormGroup>
           <FormGroup check>
 
             <Input type="radio" name="radio1" />{' '}
             <Label check>
-              <Input type="textarea" name="text" id="optionTwo" placeholder="Option Two" />
+              <Input type="textarea" name="optionTwo" placeholder="Option Two" style = {{width: "500px"}}/>
             </Label>
           </FormGroup>
           <FormGroup check>
             <Input type="radio" name="radio1" />{' '}
             <Label check>
-              <Input type="textarea" name="text" id="optionThree" placeholder="Option Three" />
+              <Input type="textarea" name ="optionThree" placeholder="Option Three" style = {{width: "500px"}}/>
             </Label>
           </FormGroup>
           <FormGroup check>
             <Input type="radio" name="radio1" />{' '}
             <Label check>
-              <Input type="textarea" name="text" id="optionFour" placeholder="Option Four" />
+              <Input type="textarea" name= "optionFour" placeholder="Option Four" style = {{width: "500px"}}/>
             </Label>
           </FormGroup>
         </FormGroup>
