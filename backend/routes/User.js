@@ -4,12 +4,17 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 
 const User = require('../models/User');
 
+router.use(bodyParser.urlencoded({extended: false}));
+router.use(bodyParser.json());
+
 router.post('/register', function (req, res) {
+  console.log(req.body);
   const { errors, isValid } = validateRegisterInput(req);
   console.log('User being added');
   if (!isValid) {
