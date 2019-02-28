@@ -41,7 +41,7 @@ router.post('/register', function (req, res) {
         avatar
       });
 
-      bcrypyt.genSalt(10, (err, salt) => {
+      bcrypt.genSalt(10, (err, salt) => {
         if (err) console.error('There was an error', err);
         else {
           bcrypt.hash(newUser.password, salt, (err, hash) => {

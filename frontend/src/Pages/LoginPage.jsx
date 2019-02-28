@@ -1,4 +1,8 @@
 import React from "react";
+import {connect} from 'react-redux';
+import PropTypes  from 'prop-types';
+import {withRouter} from 'react-router-dom';
+import {loginUser} from '../actions/authentication';
 
 export default class Login extends React.Component {
   constructor() {
