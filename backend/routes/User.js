@@ -14,8 +14,7 @@ router.use(bodyParser.urlencoded({extended: false}));
 router.use(bodyParser.json());
 
 router.post('/register', function (req, res) {
-  console.log(req.body);
-  const { errors, isValid } = validateRegisterInput(req);
+  const { errors, isValid } = validateRegisterInput(req.body);
   console.log('User being added');
   if (!isValid) {
     return res.status(400).json(errors);

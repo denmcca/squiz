@@ -26,7 +26,6 @@ app.get('/', function (req, res) {
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
     (err) => {

@@ -1,20 +1,13 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import PropTypes  from 'prop-types';
-import {withRouter} from 'react-router-dom';
-import {registerUser} from '../actions/authentication';
+import React from "react";
 
-class Register extends Component {
-
+export default class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: '',
-      email: '',
-      password: '',
-      password_confirm: '',
+      email: "",
+      password: "",
       errors: {}
-    }
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,44 +15,24 @@ class Register extends Component {
 
   handleInputChange(e) {
     this.setState({
-        [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value
+    });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = {
-      name: this.state.name,
       email: this.state.email,
-      password: this.state.password,
-      password_confirm: this.state.password_confirm
-    }
-    this.props.registerUser(user, this.props.history);
-  }
-
-  componentWillReceiveProps(nextProps){
-    if(nextProps.errors){
-      this.setState({
-        errors: nextProps.errors
-      });
-    }
+      password: this.state.password
+    };
+    console.log(user);
   }
 
   render() {
     return (
-      <div className="container" style={{ marginTop: '50px' }}>
-        <h2 style={{ marginBottom: '40px' }}>Registration</h2>
+      <div className="container" style={{ marginTop: "50px" }}>
+        <h2 style={{ marginBottom: "40px" }}>Login</h2>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Name"
-              className="form-control"
-              name="name"
-              onChange={this.handleInputChange}
-              value={this.state.name}
-            />
-          </div>
           <div className="form-group">
             <input
               type="email"
@@ -81,32 +54,12 @@ class Register extends Component {
             />
           </div>
           <div className="form-group">
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              className="form-control"
-              name="password_confirm"
-              onChange={this.handleInputChange}
-              value={this.state.password_confirm}
-            />
-          </div>
-          <div className="form-group">
             <button type="submit" className="btn btn-primary">
-              Register User
-                    </button>
+              Login User
+            </button>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
-
-Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = state => ({
-  errors: state.errors
-});
-
-export default connect(mapStateToProps, {registerUser})(withRouter(Register));
