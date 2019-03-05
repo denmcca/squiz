@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Button, ButtonGroup } from 'reactstrap';
-class QuizCreation extends Component {
+class Welcome extends Component {
   render() {
     
     return (
       <div>
-        <p>QuizCreator here!</p>
+          <p>Welcome to Squiz!</p>
+          <p>Login goes here</p>
+          <p>Registration goes here</p>
       </div>
     );
   }
 }
 
-export default QuizCreation;
+export default Welcome;

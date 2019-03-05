@@ -31,3 +31,24 @@
     transform: rotate(360deg);
   }
 }
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
+
+.row-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.bg-size {
+  width: 1000px; 
+  height: 3000px;
+  background-image: url('./images/background_image.jpg');
+  background-size: 3000px 2000px;
+}
+
+.bg-img {
+
+}
