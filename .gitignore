@@ -1,1 +1,4 @@
 node_modules
+.vs/slnx.sqlite
+.vs/squiz/v15/.suo
+.vs/VSWorkspaceState.json
