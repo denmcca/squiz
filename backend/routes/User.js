@@ -4,10 +4,14 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 
 const User = require('../models/User');
+
+router.use(bodyParser.urlencoded({extended: false}));
+router.use(bodyParser.json());
 
 router.post('/register', function (req, res) {
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -37,7 +41,7 @@ router.post('/register', function (req, res) {
         avatar
       });
 
-      bcrypyt.genSalt(10, (err, salt) => {
+      bcrypt.genSalt(10, (err, salt) => {
         if (err) console.error('There was an error', err);
         else {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
