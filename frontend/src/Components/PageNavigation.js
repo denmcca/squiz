@@ -45,9 +45,6 @@ class PageNavigation extends Component {
                 <NavLink href="/Quizzes/">Quizzes</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="font2" href="/grades">Grades</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href="/CreateQuiz/">Create Quiz</NavLink>
               </NavItem>
               <NavItem>
