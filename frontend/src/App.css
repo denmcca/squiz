@@ -34,12 +34,23 @@
   }
 }
 
-.font1{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
+.col-centered{
+  float: none;
+  margin: 0 auto;
 }
 
-.font2{
-  font-family:'Times New Roman', Times, serif;
-  font-weight:300;
+.row-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.bg-size {
+  width: 1000px; 
+  height: 3000px;
+  background-image: url('./images/background_image.jpg');
+  background-size: 3000px 2000px;
+}
+
+.bg-img {
+
 }
