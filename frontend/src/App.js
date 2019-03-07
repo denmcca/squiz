@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import { Container, Row, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import QuizCreation from "./QuizCreation";
 import Welcome from "./Welcome";
-import PageNavigation from "./PageNavigation";
 import Background from './images/background_image.jpg';
+import CreateQuizPage from './Pages/CreateQuizPage';
 import PageNavigation from "./Components/PageNavigation";
 import Router from "./Components/Router";
 import { Provider } from 'react-redux';
@@ -30,7 +29,7 @@ class App extends Component {
   isLoggedIn() {
     // let message = this.state.isLoggedIn? 'Logged In' : 'Not Logged In';
     let navPage = this.state.isLoggedIn? <PageNavigation /> : null;
-    let bodyPage = this.state.isLoggedIn? <QuizCreation /> : <Welcome />;
+    let bodyPage = this.state.isLoggedIn? <CreateQuizPage/> : <Welcome />;
     return (
       <Provider store={store}>
         <div className="App">
@@ -39,6 +38,17 @@ class App extends Component {
         </div>
       </Provider>
     );
+  }
+
+  render(){
+    return(
+      <Provider store={store}>
+        <div className="App">
+          <PageNavigation/>
+          <Router />
+        </div>
+      </Provider>
+    )
   }
 
 }
