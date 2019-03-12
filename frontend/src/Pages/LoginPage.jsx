@@ -4,7 +4,7 @@ import PropTypes  from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {loginUser} from '../actions/authentication';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -26,10 +26,10 @@ export default class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = {
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password
     };
-    console.log(user);
+    this.props.loginUser(user);
   }
 
   render() {
@@ -39,12 +39,12 @@ export default class Login extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input
-              type="email"
-              placeholder="Email"
+              type="text"
+              placeholder="Username"
               className="form-control"
-              name="email"
+              name="username"
               onChange={this.handleInputChange}
-              value={this.state.email}
+              value={this.state.username}
             />
           </div>
           <div className="form-group">
@@ -67,3 +67,16 @@ export default class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(withRouter(Login));

@@ -21,6 +21,7 @@ export const registerUser = (user, history) => dispatch => {
 };
 
 export const loginUser = user => dispatch => {
+  console.log("we doin this");
   axios
     .post("/users/login", user)
     .then(res => {

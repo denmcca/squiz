@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const expressValidator = require('express-validator');
-
+const passport = require('passport');
 const config = require('./dbconfig.js');
 
 // Initialize application 
@@ -25,6 +25,13 @@ app.use(expressValidator({
     }
 }
 ))
+
+// Passport configuration
+require('./config/passport')(passport);
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Load view engine
 // app.set('views', path.join(__dirname,'views'));

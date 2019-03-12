@@ -72,7 +72,6 @@ router.post('/register', async function(req, res){
             return;
           } else {
             console.log('Success, You are now registered and can log in');
-            res.redirect('/users/login');
           }
         });
       });
@@ -80,8 +79,16 @@ router.post('/register', async function(req, res){
   }
 });
 
+router.post('/login', (req,res,next) => {
+  passport.authenticate('local', {
+    successRedirect:'/',
+    failureRedirect:'/login',
+    failureFlash: true
+  })(req,res,next);
+});
+
 // router.get('/login', (req,res)=> {
 //     res.render('login');
-// });
+//});
 
 module.exports = router;
