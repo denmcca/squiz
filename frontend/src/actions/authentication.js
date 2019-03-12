@@ -4,7 +4,7 @@ import { GET_ERRORS } from "./types";
 export const registerUser = (user, history) => dispatch => {
   console.log(JSON.stringify(user));
   axios
-    .post("/api/users/register", user, {
+    .post("/users/register", user, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -22,7 +22,7 @@ export const registerUser = (user, history) => dispatch => {
 
 export const loginUser = user => dispatch => {
   axios
-    .post("/api/users/login", user)
+    .post("/users/login", user)
     .then(res => {
       console.log(res.data);
     })

@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import PropTypes  from 'prop-types';
-import {withRouter} from 'react-router-dom';
-import {registerUser} from '../actions/authentication';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { registerUser } from "../actions/authentication";
 
 class Register extends Component {
-
   constructor() {
     super();
     this.state = {
-      name: '',
-      email: '',
-      password: '',
-      password_confirm: '',
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      password2: "",
       errors: {}
-    }
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,8 +22,8 @@ class Register extends Component {
 
   handleInputChange(e) {
     this.setState({
-        [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value
+    });
   }
 
   handleSubmit(e) {
@@ -31,14 +31,15 @@ class Register extends Component {
     const user = {
       name: this.state.name,
       email: this.state.email,
+      username: this.state.username,
       password: this.state.password,
-      password_confirm: this.state.password_confirm
-    }
+      password2: this.state.password2
+    };
     this.props.registerUser(user, this.props.history);
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.errors){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
       });
@@ -47,8 +48,8 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="container" style={{ marginTop: '50px' }}>
-        <h2 style={{ marginBottom: '40px' }}>Registration</h2>
+      <div className="container" style={{ marginTop: "50px" }}>
+        <h2 style={{ marginBottom: "40px" }}>Registration</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input
@@ -72,6 +73,16 @@ class Register extends Component {
           </div>
           <div className="form-group">
             <input
+              type="text"
+              placeholder="Username"
+              className="form-control"
+              name="username"
+              onChange={this.handleInputChange}
+              value={this.state.username}
+            />
+          </div>
+          <div className="form-group">
+            <input
               type="password"
               placeholder="Password"
               className="form-control"
@@ -85,28 +96,31 @@ class Register extends Component {
               type="password"
               placeholder="Confirm Password"
               className="form-control"
-              name="password_confirm"
+              name="password2"
               onChange={this.handleInputChange}
-              value={this.state.password_confirm}
+              value={this.state.password2}
             />
           </div>
           <div className="form-group">
             <button type="submit" className="btn btn-primary">
               Register User
-                    </button>
+            </button>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
 Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, {registerUser})(withRouter(Register));
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));
