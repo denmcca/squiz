@@ -27,6 +27,13 @@ class CreateQuizPage extends Component {
     }));
     console.log(this.state.questions);
   }
+  removeQuestion(index){
+    var newQuestionList = [...this.state.questions];
+    if(index !== -1){
+      newQuestionList.splice(index, 1);
+      this.setState({questions: newQuestionList});
+    }
+  }
   render() {
     return (
       <Form>
@@ -90,6 +97,7 @@ class CreateQuizPage extends Component {
                 <br/> {this.state.questions[idx].optionThree}
                 <br/> {this.state.questions[idx].optionFour}
                 </label>
+                <Button onClick = {() => {this.removeQuestion(idx);}}>Remove Question</Button>
               </div>
             )
           })
