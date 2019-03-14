@@ -1,12 +1,34 @@
 import React, { Component } from "react";
 import "../App.css";
-import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
+  ListGroup,
+  ListGroupItem
+} from 'reactstrap';
 class CreateQuizPage extends Component {
   constructor() {
     super();
     // the state stores the list of questions 
     this.state = {
-      questions: [],
+      questions: [
+        {
+          question: "Seven properties associated with life",
+          optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
+          optionTwo: "Donec rutrum placerat gravida.",
+          optionThree: "Quisque iaculis tellus eget.",
+          optionFour: "Fusce blandit justo sit.",
+          rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
+        },
+      ],
       question: "",
       optionOne: "",
       optionTwo: "",
@@ -56,7 +78,7 @@ class CreateQuizPage extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="container">
         <Modal isOpen={this.state.addPrompt}>
           <ModalHeader>Add A Question</ModalHeader>
           <ModalBody>
@@ -120,25 +142,39 @@ class CreateQuizPage extends Component {
           <legend> Create A Quiz </legend>
           <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
           <br />
+          <br />
           <Button>Submit Quiz</Button>
+          <br />
           {
             // Display the list of questions that have been added to the list
             this.state.questions.map((val, idx) => {
               let questionID = `question-${idx}`
               return (
-                <div key={idx}>
+                <div key={idx} className="questions-List">
                   {/** Label of the question */}
                   <label htmlFor={questionID}>
-                    {`Question #${idx + 1}`}
-                    <br /> {this.state.questions[idx].question}
-                    <br /> {this.state.questions[idx].optionOne}
-                    <br /> {this.state.questions[idx].optionTwo}
-                    <br /> {this.state.questions[idx].optionThree}
-                    <br /> {this.state.questions[idx].optionFour}
-                    <br /> Answer: {this.state.questions[idx].rightAnswer}
+                    <ListGroup className="question-Alignment">
+                      <ListGroupItem >
+                        {`${idx + 1}`}: {this.state.questions[idx].question}
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        a: {this.state.questions[idx].optionOne}
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        b: {this.state.questions[idx].optionTwo}
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        c: {this.state.questions[idx].optionThree}
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        d: {this.state.questions[idx].optionFour}
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        Answer: {this.state.questions[idx].rightAnswer}
+                      </ListGroupItem>
+                      <Button onClick={() => { this.removeQuestion(idx); }}>Remove Question</Button>
+                    </ListGroup>
                   </label>
-                  <br />
-                  <Button onClick={() => { this.removeQuestion(idx); }}>Remove Question</Button>
                 </div>
               )
             })
