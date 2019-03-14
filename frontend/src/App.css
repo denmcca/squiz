@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+.question-Alignment{
+  text-align: left;
+  width: 50%;
+}
+.questions-List{
+  float: left;
+  
+}
 
 .App {
   text-align: center;
@@ -45,12 +53,24 @@
 }
 
 .bg-size {
-  width: 1000px; 
-  height: 3000px;
+  width: 100%; /* changes width of whole section */
+  height: 1050px;
+  align-self: center;
   background-image: url('./images/background_image.jpg');
-  background-size: 3000px 2000px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  
+  align-content: space-between;
 }
 
+.center-content {
+  width: auto;
+  height: auto;
+  align-content: center;
+}
+/* 
 .bg-img {
 
-}
+} */
