@@ -21,12 +21,13 @@ class CreateQuizPage extends Component {
     this.state = {
       questions: [
         {
-          question: "Seven properties associated with life",
-          optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
-          optionTwo: "Donec rutrum placerat gravida.",
-          optionThree: "Quisque iaculis tellus eget.",
-          optionFour: "Fusce blandit justo sit.",
-          rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
+          // Debug testing - starting with a given array of question
+          // question: "Seven properties associated with life",
+          // optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
+          // optionTwo: "Donec rutrum placerat gravida.",
+          // optionThree: "Quisque iaculis tellus eget.",
+          // optionFour: "Fusce blandit justo sit.",
+          // rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
         },
       ],
       question: "",
@@ -43,6 +44,7 @@ class CreateQuizPage extends Component {
   }
   // adding a question to the list
   addQuestion = (e) => {
+    // if the right answer is not empty, then add the question
     if (this.state.rightAnswer !== "") {
       this.setState((prevState) => ({
         // add a new set of question to the list
@@ -58,27 +60,35 @@ class CreateQuizPage extends Component {
         optionThree: "",
         optionFour: "",
         rightAnswer: "",
-        // disable prompt
+        // disable prompt (close the modal)
         addPrompt: false
       }));
     } else {
+      // prompt user to add the right answer
       alert("Please input the Answer");
     }
     console.log(this.state.questions);
   }
+  // remove a question from the list
+  // arg: index of the question to be removed
   removeQuestion(index) {
     var newQuestionList = [...this.state.questions];
     if (index !== -1) {
+      // remove the given index
       newQuestionList.splice(index, 1);
+      // update the state variable
       this.setState({ questions: newQuestionList });
     }
   }
+  // toggles the modal for adding the question
   toggleAddPrompt() {
     this.setState({ addPrompt: false });
   }
+  // the displayed page
   render() {
     return (
       <div className="container">
+        {/* The Prompt for adding a question, its a modal or a 'pop-up' */}
         <Modal isOpen={this.state.addPrompt}>
           <ModalHeader>Add A Question</ModalHeader>
           <ModalBody>
@@ -138,6 +148,7 @@ class CreateQuizPage extends Component {
             <Button onClick={() => this.setState({ addPrompt: false })}>Cancel</Button>
           </ModalFooter>
         </Modal>
+        {/* The display of the page without the prompt */}
         <Form>
           <legend> Create A Quiz </legend>
           <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
