@@ -1,11 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+.course-List{
+  width: 20%;
+}
+.recent-Grades{
+  width: 20%;
+}
+.announcements{
+  width: 35%;
+}
+.due-Dates{
+  width: 25%;
+}
 .question-Alignment{
   text-align: left;
-  width: 50%;
+  width: 100%;
 }
 .questions-List{
-  float: left;
-  
+  width: 100%;
 }
 
 .App {
