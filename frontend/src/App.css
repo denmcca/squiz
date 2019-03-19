@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 .question-Alignment{
   text-align: left;
-  width: 50%;
+  width: 100%;
 }
 .questions-List{
-  float: left;
-  
+  width: 100%;
 }
 
 .App {

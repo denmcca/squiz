@@ -12,6 +12,8 @@ import {
   ModalHeader,
   ModalFooter,
   ListGroup,
+  Col,
+  Row,
   ListGroupItem
 } from 'reactstrap';
 class CreateQuizPage extends Component {
@@ -140,45 +142,52 @@ class CreateQuizPage extends Component {
         </Modal>
         <Form>
           <legend> Create A Quiz </legend>
+
           <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
           <br />
           <br />
           <Button>Submit Quiz</Button>
           <br />
-          {
-            // Display the list of questions that have been added to the list
-            this.state.questions.map((val, idx) => {
-              let questionID = `question-${idx}`
-              return (
-                <div key={idx} className="questions-List">
-                  {/** Label of the question */}
-                  <label htmlFor={questionID}>
-                    <ListGroup className="question-Alignment">
-                      <ListGroupItem >
-                        {`${idx + 1}`}: {this.state.questions[idx].question}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        a: {this.state.questions[idx].optionOne}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        b: {this.state.questions[idx].optionTwo}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        c: {this.state.questions[idx].optionThree}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        d: {this.state.questions[idx].optionFour}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        Answer: {this.state.questions[idx].rightAnswer}
-                      </ListGroupItem>
-                      <Button onClick={() => { this.removeQuestion(idx); }}>Remove Question</Button>
-                    </ListGroup>
-                  </label>
-                </div>
-              )
-            })
-          }
+          <Row>
+            {
+              // Display the list of questions that have been added to the list
+              this.state.questions.map((val, idx) => {
+                let questionID = `question-${idx}`
+                return (
+                  <Col xs={6}>
+                    <div key={idx}>
+                      {/** Label of the question */}
+
+                      <label htmlFor={questionID} className="questions-List">
+                        <ListGroup className="question-Alignment">
+                          <ListGroupItem >
+                            {`${idx + 1}`}: {this.state.questions[idx].question}
+                          </ListGroupItem>
+                          <ListGroupItem>
+                            a: {this.state.questions[idx].optionOne}
+                          </ListGroupItem>
+                          <ListGroupItem>
+                            b: {this.state.questions[idx].optionTwo}
+                          </ListGroupItem>
+                          <ListGroupItem>
+                            c: {this.state.questions[idx].optionThree}
+                          </ListGroupItem>
+                          <ListGroupItem>
+                            d: {this.state.questions[idx].optionFour}
+                          </ListGroupItem>
+                          <ListGroupItem>
+                            Answer: {this.state.questions[idx].rightAnswer}
+                          </ListGroupItem>
+                          <Button onClick={() => { this.removeQuestion(idx); }}>Remove Question</Button>
+                        </ListGroup>
+                      </label>
+
+                    </div>
+                  </Col>
+                )
+              })
+            }
+          </Row>
         </Form>
       </div>
     );
