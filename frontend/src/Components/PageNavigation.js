@@ -48,6 +48,9 @@ class PageNavigation extends Component {
                 <NavLink href="/CreateQuiz/">Create Quiz</NavLink>
               </NavItem>
               <NavItem>
+                <NavLink href="/grades/">My Grades</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href="/Settings/">Settings</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
