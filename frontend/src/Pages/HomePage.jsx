@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 // import DueDates from '../Components/DueDates'
 import CourseList from '../Components/CourseList'
+import UserInfo from '../Components/UserInfo'
 export default class HomePage extends Component {
   constructor() {
     super();
@@ -22,6 +23,7 @@ export default class HomePage extends Component {
       <Row>
         {/* Courses list */}
         <Col className="course-List">
+          <UserInfo />
           <CourseList/>
         </Col>
         {/* Recent Grades */}
