@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import {
   Row,
   Col,
-  Collapse,
-  ListGroup,
-  ListGroupItem,
-  Button,
-  Card,
-  CardBody
 } from 'reactstrap';
+// import DueDates from '../Components/DueDates'
+import CourseList from '../Components/CourseList'
 export default class HomePage extends Component {
   constructor() {
     super();
@@ -19,32 +15,14 @@ export default class HomePage extends Component {
     }
   }
   displayCourse() {
-
+    this.setState({ courseCollapse: !this.state.courseCollapse });
   }
   render() {
     return (
       <Row>
         {/* Courses list */}
         <Col className="course-List">
-
-          <ListGroup>
-            <Button onClick={this.displayCourse}>
-              Courses
-          </Button>
-            <Collapse isOpen={this.state.courseCollapse}>
-              {
-                // Display the list of questions that have been added to the list
-                this.state.courses.map((val, idx) => {
-                  return (
-                    <ListGroupItem>
-                      {this.state.courses[idx].courseName}
-                    </ListGroupItem>
-                  )
-                })
-              }
-            </Collapse>
-
-          </ListGroup>
+          <CourseList/>
         </Col>
         {/* Recent Grades */}
         <Col className="recent-Grades">
@@ -56,7 +34,7 @@ export default class HomePage extends Component {
         </Col>
         {/* Due Dates */}
         <Col className="due-Dates">
-          Due Dates
+          {/* <DueDates/> */}
         </Col>
       </Row>
     )
