@@ -5,6 +5,7 @@ import RegisterPage from '../Pages/RegisterPage';
 import HomePage from '../Pages/HomePage';
 import CreateQuizPage from '../Pages/CreateQuizPage';
 import WelcomePage from '../Pages/Welcome';
+import GradesPage from '../Pages/GradesPage';
 
 
 export default class Router extends Component {
@@ -36,7 +37,8 @@ export default class Router extends Component {
             <Route exact path='/' component={HomePage} />
             <Route exact path='/login' component={LoginPage} />
             <Route exact path='/CreateQuiz' component={CreateQuizPage} />
-            <Route exact path='/register' component={RegisterPage} />
+            <Route exact path='/register' component ={RegisterPage} />
+            <Route exact path='/grades' component={GradesPage} />
           </div>
         </BrowserRouter>
       )
