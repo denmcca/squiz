@@ -81,6 +81,11 @@
   height: auto;
   align-content: center;
 }
+
+.table-component {
+  width: 50%;
+
+}
 /* 
 .bg-img {
 

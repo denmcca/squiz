@@ -12,7 +12,7 @@ export default class Router extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true,
+      isLoggedIn: this.props.isLoggedIn,
     }
   }
 
@@ -36,7 +36,7 @@ export default class Router extends Component {
             <Route exact path='/' component={HomePage} />
             <Route exact path='/login' component={LoginPage} />
             <Route exact path='/CreateQuiz' component={CreateQuizPage} />
-            <Route exact path='/register' component ={RegisterPage} />
+            <Route exact path='/register' component={RegisterPage} />
           </div>
         </BrowserRouter>
       )

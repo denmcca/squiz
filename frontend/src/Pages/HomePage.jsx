@@ -9,6 +9,8 @@ import {
   Card,
   CardBody
 } from 'reactstrap';
+
+import {DueDatesTable, DueDates} from '../Components/DueDates';
 export default class HomePage extends Component {
   constructor() {
     super();
@@ -30,7 +32,7 @@ export default class HomePage extends Component {
           <ListGroup>
             <Button onClick={this.displayCourse}>
               Courses
-          </Button>
+            </Button>
             <Collapse isOpen={this.state.courseCollapse}>
               {
                 // Display the list of questions that have been added to the list
@@ -56,7 +58,8 @@ export default class HomePage extends Component {
         </Col>
         {/* Due Dates */}
         <Col className="due-Dates">
-          Due Dates
+          <DueDatesTable />
+          {/* <DueDates /> */}
         </Col>
       </Row>
     )
