@@ -10,6 +10,12 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isLoggedIn: true,
+    }
+  }
 
   render(){
     return(
@@ -17,8 +23,8 @@ class App extends Component {
         <div className="center-content">
           <div className="App">
             <div>
-              <PageNavigation />
-              <Router />
+              <PageNavigation isLoggedIn={this.state.isLoggedIn}/>
+              <Router isLoggedIn={this.state.isLoggedIn}/>
             </div>
           </div>
         </div>
