@@ -12,7 +12,7 @@ export default class UserInfo extends Component {
         super();
         // the state stores the list of questions 
         this.state = {
-            user: [{ name: "John Doe", }]
+            user: "John Doe"
         }
     }
     render() {
@@ -20,7 +20,7 @@ export default class UserInfo extends Component {
             <ListGroup>
                 <ListGroupItem>
                     <IoIosPerson />
-                        {this.state.user.name}
+                        {this.state.user}
                 </ListGroupItem>
             </ListGroup>
         )
