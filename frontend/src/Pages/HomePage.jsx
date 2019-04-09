@@ -6,8 +6,10 @@ import {
 // import DueDates from '../Components/DueDates'
 import CourseList from '../Components/CourseList'
 import UserInfo from '../Components/UserInfo'
+import RecentGrades from '../Components/RecentGrades'
+import Announcements from '../Components/Announcements'
 
-import {DueDatesTable, DueDates} from '../Components/DueDates';
+import { DueDatesTable, DueDates } from '../Components/DueDates';
 export default class HomePage extends Component {
   constructor() {
     super();
@@ -26,15 +28,15 @@ export default class HomePage extends Component {
         {/* Courses list */}
         <Col className="course-List">
           <UserInfo />
-          <CourseList/>
+          <CourseList />
         </Col>
         {/* Recent Grades */}
         <Col className="recent-Grades">
-          Recent Grades
+          <RecentGrades />
         </Col>
         {/* Announcements */}
         <Col className="announcements">
-          Announcements
+          <Announcements />
         </Col>
         {/* Due Dates */}
         <Col className="due-Dates">

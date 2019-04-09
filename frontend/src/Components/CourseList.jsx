@@ -14,9 +14,15 @@ export default class CourseList extends Component {
         super();
         // the state stores the list of questions 
         this.state = {
-            courses: [{ courseName: "CECS 445" }, { courseName: "CECS 491A" }, { courseName: "CECS 475" }, { courseName: "CECS 428" }],
+            courses: [],
             courseCollapse: true
         }
+    }
+    componentDidMount(){
+        this.fetchData()
+    }
+    fetchData = async () => {
+        this.setState({courses: [{ courseName: "CECS 445" }, { courseName: "CECS 491A" }, { courseName: "CECS 475" }, { courseName: "CECS 428" }]})
     }
     displayCourse() {
         this.setState({ courseCollapse: !this.state.courseCollapse });
