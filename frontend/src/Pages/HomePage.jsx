@@ -24,22 +24,26 @@ export default class HomePage extends Component {
   }
   render() {
     return (
-      <Row>
+      <Row style = {{marginLeft: 3, marginRight: 3}}>
         {/* Courses list */}
         <Col className="course-List">
+          <br />
           <UserInfo />
           <CourseList />
         </Col>
         {/* Recent Grades */}
-        <Col className="recent-Grades">
+        <Col className="recent-Grades" xs = "2">
+          <br />
           <RecentGrades />
         </Col>
         {/* Announcements */}
         <Col className="announcements">
+          <br />
           <Announcements />
         </Col>
         {/* Due Dates */}
         <Col className="due-Dates">
+          <br />
           <DueDatesTable />
           {/* <DueDates /> */}
         </Col>
