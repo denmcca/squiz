@@ -40,14 +40,18 @@ class App extends Component {
   }
   render() {
     return (
-        <div className="App">
-          {this.state.user ? (
-                  <HomePage />
-              ) :
-              (
-                  <LoginPage />
-              )}
-        </div>
+      <div className="App">
+        {this.state.user ? (
+          <view>
+
+            <PageNavigation isLoggedIn={true} />
+            <HomePage />
+          </view>
+        ) :
+          (
+            <LoginPage />
+          )}
+      </div>
     );
   }
 }
