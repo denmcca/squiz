@@ -16,8 +16,8 @@ export default class GradesPage extends Component {
 
   render() {
     return(
-        <div style={{ width: "55%", margin: "0 auto", border: "2px red dashed"}}>
-            <Table responsive>
+        <div style={{ width: "55%", margin: "0 auto"}}>
+            <Table>
                 <thead>
                   <tr>
                     <th id="quizName">Quizzes</th>
