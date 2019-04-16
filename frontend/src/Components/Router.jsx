@@ -30,11 +30,11 @@ export default class Router extends Component {
   // }
 
   render() {
-    if(this.state.isLoggedIn){
+    if(this.state.isLoggedIn) {
       return(
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <div>
-            <Route exact path='/' component={HomePage} />
+            <Route exact path='/' component={LoginPage} />
             <Route exact path='/login' component={LoginPage} />
             <Route exact path='/CreateQuiz' component={CreateQuizPage} />
             <Route exact path='/register' component ={RegisterPage} />

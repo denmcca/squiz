@@ -10,9 +10,12 @@ import RecentGrades from '../Components/RecentGrades'
 import Announcements from '../Components/Announcements'
 
 import { DueDatesTable, DueDates } from '../Components/DueDates';
+import firebase from '../firebase'
 export default class HomePage extends Component {
-  constructor() {
-    super();
+
+  constructor(props) {
+      super(props);
+      this.logout = this.logout.bind(this);
     // the state stores the list of questions 
     this.state = {
       courses: [{ courseName: "CECS 445" }, { courseName: "CECS 491A" }, { courseName: "CECS 475" }, { courseName: "CECS 428" }],
@@ -22,8 +25,13 @@ export default class HomePage extends Component {
   displayCourse() {
     this.setState({ courseCollapse: !this.state.courseCollapse });
   }
+    logout() {
+        firebase.auth().signOut();
+    }
+
   render() {
     return (
+        <div>
       <Row style = {{marginLeft: 3, marginRight: 3}}>
         {/* Courses list */}
         <Col className="course-List">
@@ -48,6 +56,8 @@ export default class HomePage extends Component {
           {/* <DueDates /> */}
         </Col>
       </Row>
+            <button onClick={this.logout}>Logout</button>
+        </div>
     )
   }
 }

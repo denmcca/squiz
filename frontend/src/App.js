@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import fire from './firebase'
 // import { Container, Row, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Welcome from "./Pages/Welcome";
@@ -8,30 +9,47 @@ import PageNavigation from "./Components/PageNavigation";
 import Router from "./Components/Router";
 import { Provider } from 'react-redux';
 import store from './store';
+import HomePage from "./Pages/HomePage";
+import LoginPage from './Pages/LoginPage';
+import router from './Components/Router'
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isLoggedIn: true,
-    }
+  constructor() {
+    super();
+    this.state = ({
+      user: null,
+    });
+    this.authListener = this.authListener.bind(this);
   }
 
-  render(){
-    return(
-      <Provider store={store}>
-        <div className="center-content">
-          <div className="App">
-            <div>
-              <PageNavigation isLoggedIn={this.state.isLoggedIn}/>
-              <Router isLoggedIn={this.state.isLoggedIn}/>
-            </div>
-          </div>
+  componentDidMount() {
+    this.authListener();
+  }
+
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        this.setState({ user });
+        localStorage.setItem('user', user.uid);
+      } else {
+        this.setState({ user: null });
+        localStorage.removeItem('user');
+      }
+    });
+  }
+  render() {
+    return (
+        <div className="App">
+          {this.state.user ? (
+                  <HomePage />
+              ) :
+              (
+                  <LoginPage />
+              )}
         </div>
-      </Provider>
-    )
+    );
   }
-
 }
 
 export default App;
