@@ -6,37 +6,22 @@ import HomePage from '../Pages/HomePage';
 import CreateQuizPage from '../Pages/CreateQuizPage';
 import WelcomePage from '../Pages/Welcome';
 import GradesPage from '../Pages/GradesPage';
+import LogoutPage from '../Pages/LogoutPage';
+import { connect } from 'react-redux';
 
 
-export default class Router extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoggedIn: this.props.isLoggedIn,
-    }
-  }
-
-  // isLoggedIn() {
-  //   // let message = this.state.isLoggedIn? 'Logged In' : 'Not Logged In';
-  //   let navPage = this.state.isLoggedIn? <PageNavigation /> : null;
-  //   let bodyPage = this.state.isLoggedIn? <CreateQuizPage /> : <Welcome />;
-  //   return (
-  //     <div>
-  //       {this.state.isLoggedIn? <PageNavigation /> : null}
-  //       {this.state.isLoggedIn? <CreateQuizPage /> : <Welcome />}
-  //     </div>
-  //   );
-  // }
-
+class Router extends React.Component {
   render() {
-    if(this.state.isLoggedIn){
+    console.log("Rendering router: " + this.props.isLoggedIn);
+    if(this.props.isLoggedIn) {
       return(
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <div>
             <Route exact path='/' component={HomePage} />
-            <Route exact path='/login' component={LoginPage} />
-            <Route exact path='/CreateQuiz' component={CreateQuizPage} />
+            <Route exact path="/welcome" component={WelcomePage} />
+            <Route exact path='/logout' component={LogoutPage} />
+            {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
+            <Route exact path='/createquiz' component={CreateQuizPage} />
             <Route exact path='/register' component ={RegisterPage} />
             <Route exact path='/grades' component={GradesPage} />
           </div>
@@ -48,6 +33,7 @@ export default class Router extends Component {
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <div>
             <Route component={WelcomePage} />
+            <Route exact path='/logout' component={LogoutPage} />
             <Route exact path='/login' component={LoginPage} />
           </div>
         </BrowserRouter>
@@ -55,3 +41,17 @@ export default class Router extends Component {
     }
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn:state.isLoggedIn
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logUserOut: () => dispatch({type: 'LOGOUT'})
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Router)

@@ -5,33 +5,42 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import Welcome from "./Pages/Welcome";
 // import CreateQuizPage from './Pages/CreateQuizPage';
 import PageNavigation from "./Components/PageNavigation";
+import { button } from 'react'
 import Router from "./Components/Router";
-import { Provider } from 'react-redux';
-import store from './store';
+import { connect } from 'react-redux'
+
+import {Link} from 'react-router-dom'
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isLoggedIn: true,
-    }
-  }
-
-  render(){
+  render() {
+    // const Props = {
+    //   isLoggedIn: this.state.isLoggedIn,
+    //   toggleIsLoggedIn: this.toggleIsLoggedIn,
+    // };
     return(
-      <Provider store={store}>
-        <div className="center-content">
-          <div className="App">
-            <div>
-              <PageNavigation isLoggedIn={this.state.isLoggedIn}/>
-              <Router isLoggedIn={this.state.isLoggedIn}/>
-            </div>
+      <div className="center-content">
+        <div className="App">
+          <div>
+            <PageNavigation />
+            <Router />
+            <span><p>{this.props.isLoggedIn ? "true" : "false"}</p></span>
+            <button onClick={this.props.logInUser}>{this.props.isLoggedIn}</button>
           </div>
         </div>
-      </Provider>
+      </div>
     )
   }
-
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.isLoggedIn
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logInUser: () => dispatch({type: 'LOGIN'}),
+  }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

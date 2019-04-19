@@ -16,42 +16,44 @@ import {
   Row,
   ListGroupItem
 } from 'reactstrap';
+import { connect } from 'react-redux';
+
 class CreateQuizPage extends Component {
-  constructor() {
-    super();
-    // the state stores the list of questions 
-    this.state = {
-      questions: [
-        {
-          question: "Seven properties associated with life",
-          optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
-          optionTwo: "Donec rutrum placerat gravida.",
-          optionThree: "Quisque iaculis tellus eget.",
-          optionFour: "Fusce blandit justo sit.",
-          rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
-        },
-      ],
-      question: "",
-      optionOne: "",
-      optionTwo: "",
-      optionThree: "",
-      optionFour: "",
-      rightAnswer: "",
-      addPrompt: false,
-    }
-    // listeners
-    //this.handleInputChange = this.handleInputChange.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   // the state stores the list of questions 
+  //   this.state = {
+  //     questions: [
+  //       {
+  //         question: "Seven properties associated with life",
+  //         optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
+  //         optionTwo: "Donec rutrum placerat gravida.",
+  //         optionThree: "Quisque iaculis tellus eget.",
+  //         optionFour: "Fusce blandit justo sit.",
+  //         rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
+  //       },
+  //     ],
+  //     question: "",
+  //     optionOne: "",
+  //     optionTwo: "",
+  //     optionThree: "",
+  //     optionFour: "",
+  //     rightAnswer: "",
+  //     addPrompt: false,
+  //   }
+  //   // listeners
+  //   //this.handleInputChange = this.handleInputChange.bind(this);
+  //   //this.handleSubmit = this.handleSubmit.bind(this);
+  // }
   // adding a question to the list
   addQuestion = (e) => {
-    if (this.state.rightAnswer !== "") {
+    if (this.props.rightAnswer !== "") {
       this.setState((prevState) => ({
         // add a new set of question to the list
         questions: [...prevState.questions,
         {
-          question: this.state.question, optionOne: this.state.optionOne, optionTwo: this.state.optionTwo,
-          optionThree: this.state.optionThree, optionFour: this.state.optionFour, rightAnswer: this.state.rightAnswer
+          question: this.props.question, optionOne: this.props.optionOne, optionTwo: this.props.optionTwo,
+          optionThree: this.props.optionThree, optionFour: this.props.optionFour, rightAnswer: this.props.rightAnswer
         }],
         // clear previous inputs
         question: "",
@@ -66,10 +68,10 @@ class CreateQuizPage extends Component {
     } else {
       alert("Please input the Answer");
     }
-    console.log(this.state.questions);
+    console.log(this.props.questions);
   }
   removeQuestion(index) {
-    var newQuestionList = [...this.state.questions];
+    var newQuestionList = [...this.props.questions];
     if (index !== -1) {
       newQuestionList.splice(index, 1);
       this.setState({ questions: newQuestionList });
@@ -81,7 +83,7 @@ class CreateQuizPage extends Component {
   render() {
     return (
       <div className="container">
-        <Modal isOpen={this.state.addPrompt}>
+        <Modal isOpen={this.props.addPrompt}>
           <ModalHeader>Add A Question</ModalHeader>
           <ModalBody>
 
@@ -90,7 +92,7 @@ class CreateQuizPage extends Component {
               <Input placeholder="Question"
                 onChange={(text) => {
                   this.setState({ question: text.target.value });
-                  console.log(this.state.question);
+                  console.log(this.props.question);
                 }} />
             </FormGroup>
             <FormGroup>
@@ -101,8 +103,8 @@ class CreateQuizPage extends Component {
             <FormGroup tag="answers">
               <legend>Answers</legend>
               <FormGroup check>
-                <Input type="radio" name="radio1" value={this.state.optionOne}
-                  onChange={() => { this.setState({ rightAnswer: this.state.optionOne }) }} />{' '}
+                <Input type="radio" name="radio1" value={this.props.optionOne}
+                  onChange={() => { this.setState({ rightAnswer: this.props.optionOne }) }} />{' '}
                 <Label check>
                   <Input type="textarea" name="optionOne" placeholder="Option One" style={{ width: "240%" }}
                     onChange={(text) => this.setState({ optionOne: text.target.value })} />
@@ -110,24 +112,24 @@ class CreateQuizPage extends Component {
               </FormGroup>
               <FormGroup check>
 
-                <Input type="radio" name="radio1" value={this.state.optionTwo}
-                  onChange={() => { this.setState({ rightAnswer: this.state.optionTwo }) }} />{' '}
+                <Input type="radio" name="radio1" value={this.props.optionTwo}
+                  onChange={() => { this.setState({ rightAnswer: this.props.optionTwo }) }} />{' '}
                 <Label check>
                   <Input type="textarea" name="optionTwo" placeholder="Option Two" style={{ width: "240%" }}
                     onChange={(text) => this.setState({ optionTwo: text.target.value })} />
                 </Label>
               </FormGroup>
               <FormGroup check>
-                <Input type="radio" name="radio1" value={this.state.optionThree}
-                  onChange={() => { this.setState({ rightAnswer: this.state.optionThree }) }} />{' '}
+                <Input type="radio" name="radio1" value={this.props.optionThree}
+                  onChange={() => { this.setState({ rightAnswer: this.props.optionThree }) }} />{' '}
                 <Label check>
                   <Input type="textarea" name="optionThree" placeholder="Option Three" style={{ width: "240%" }}
                     onChange={(text) => this.setState({ optionThree: text.target.value })} />
                 </Label>
               </FormGroup>
               <FormGroup check>
-                <Input type="radio" name="radio1" value={this.state.optionFour}
-                  onChange={() => { this.setState({ rightAnswer: this.state.optionFour }) }} />{' '}
+                <Input type="radio" name="radio1" value={this.props.optionFour}
+                  onChange={() => { this.setState({ rightAnswer: this.props.optionFour }) }} />{' '}
                 <Label check>
                   <Input type="textarea" name="optionFour" placeholder="Option Four" style={{ width: "240%" }}
                     onChange={(text) => this.setState({ optionFour: text.target.value })} />
@@ -151,7 +153,7 @@ class CreateQuizPage extends Component {
           <Row>
             {
               // Display the list of questions that have been added to the list
-              this.state.questions.map((val, idx) => {
+              this.props.questions.map((val, idx) => {
                 let questionID = `question-${idx}`
                 return (
                   <Col xs={6}>
@@ -161,22 +163,22 @@ class CreateQuizPage extends Component {
                       <label htmlFor={questionID} className="questions-List">
                         <ListGroup className="question-Alignment">
                           <ListGroupItem >
-                            {`${idx + 1}`}: {this.state.questions[idx].question}
+                            {`${idx + 1}`}: {this.props.questions[idx].question}
                           </ListGroupItem>
                           <ListGroupItem>
-                            a: {this.state.questions[idx].optionOne}
+                            a: {this.props.questions[idx].optionOne}
                           </ListGroupItem>
                           <ListGroupItem>
-                            b: {this.state.questions[idx].optionTwo}
+                            b: {this.props.questions[idx].optionTwo}
                           </ListGroupItem>
                           <ListGroupItem>
-                            c: {this.state.questions[idx].optionThree}
+                            c: {this.props.questions[idx].optionThree}
                           </ListGroupItem>
                           <ListGroupItem>
-                            d: {this.state.questions[idx].optionFour}
+                            d: {this.props.questions[idx].optionFour}
                           </ListGroupItem>
                           <ListGroupItem>
-                            Answer: {this.state.questions[idx].rightAnswer}
+                            Answer: {this.props.questions[idx].rightAnswer}
                           </ListGroupItem>
                           <Button onClick={() => { this.removeQuestion(idx); }}>Remove Question</Button>
                         </ListGroup>
@@ -194,4 +196,24 @@ class CreateQuizPage extends Component {
   }
 }
 
-export default CreateQuizPage;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn:state.isLoggedIn,
+    questions:state.questions,
+    question:state.question,
+    optionOne:state.optionOne,
+    optionTwo:state.optionTwo,
+    optionThree:state.optionThree,
+    optionFour:state.optionFour,
+    rightAnswer:state.rightAnswer,
+    addPrompt:state.addPrompt
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // logUserOut: () => dispatch({type: 'LOGOUT'})
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateQuizPage)

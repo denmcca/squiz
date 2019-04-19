@@ -10,15 +10,9 @@ import {
     FormText 
 } from 'reactstrap';
 import SquizLogo from '../squiz logo.png';
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-
-        }
-    }
-
   render() {  
     return (
         <Form width="50%">
@@ -44,4 +38,16 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        userName: state.userName,
+        password: state.password // placeholder
+    }
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logUserIn: () => dispatch({type:'LOGIN'}),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

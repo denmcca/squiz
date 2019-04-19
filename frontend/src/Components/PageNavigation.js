@@ -13,46 +13,43 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 import SquizLogo from '../squiz logo.png';
+import { connect } from 'react-redux';
 
 class PageNavigation extends Component {
-  constructor(props) {
-    super(props);
+  // constructor() {
+  //   this.state = {
+  //     isOpen: false,
+  //   };
+  // }
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false,
-      isLoggedIn: this.props.isLoggedIn,
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
+  // toggle() {
+  //   this.setState({
+  //     isOpen: !this.state.isOpen
+  //   });
+  // }
+
+  
 
   render() {
-  
+    console.log("PageNavigation: " + this.props.isLoggedIn);
     let loginText;
     let loginRoute;
     let loginMoreRoutes;
-
-    loginText = this.state.isLoggedIn ? "Logout" : "Login";
-    loginRoute = this.state.isLoggedIn ? "/Logout/" : "/Login";
-    loginMoreRoutes = this.state.isLoggedIn ? displayMoreRoutes() : null;
-
+    loginText = this.props.isLoggedIn ? "Logout" : "Login";
+    loginRoute = this.props.isLoggedIn ? "/logout/" : "/login/";
+    loginMoreRoutes = this.props.isLoggedIn ? displayMoreRoutes() : null;
+    
     return (
       <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">
           <img src={SquizLogo} alt="Squiz" width="100"/>
           </NavbarBrand>
-          {/* <NavbarToggler onClick={this.toggle} />  not sure what this does*/}
-          <Collapse className="font1" isOpen={this.state.isOpen} navbar>
+          <Collapse className="font1" isOpen={this.props.isDropDownOpen} navbar>
             <Nav className="ml-auto" navbar>
               {loginMoreRoutes}
-              {/* {displayMoreRoutes} */}
-              <NavItem >
-                <NavLink className="font2" href={loginRoute}>{loginText}</NavLink>
+              <NavItem>
+                <NavLink className="font2" href={loginRoute} onClick={this.props.logUserOut}>{loginText}</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
@@ -69,16 +66,16 @@ function displayMoreRoutes(){
         <NavLink href="/">Dash</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="/Quizzes/">Quizzes</NavLink>
+        <NavLink href="/quizzes/">Quizzes</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="/CreateQuiz/">Create Quiz</NavLink>
+        <NavLink href="/createquiz/">Create Quiz</NavLink>
       </NavItem>
       <NavItem>
         <NavLink href="/grades/">My Grades</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="/Settings/">Settings</NavLink>
+        <NavLink href="/settings/">Settings</NavLink>
       </NavItem>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
@@ -99,4 +96,18 @@ function displayMoreRoutes(){
   );
 }
 
-export default PageNavigation;
+const mapStateToProps = (state) => {
+  return {
+    isDropDownOpen: state.isDropDownOpen,
+    isLoggedIn: state.isLoggedIn
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openDropDown: () => dispatch({type: 'OPEN_DROPDOWN'}),
+    logUserOut: () => dispatch({type: 'LOGOUT'})
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageNavigation);
