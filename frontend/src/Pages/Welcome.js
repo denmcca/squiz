@@ -11,7 +11,7 @@ class Welcome extends Component {
       <div className="bg-size">
         <img src={SquizLogo} alt="Squiz" width="500"/>
         <p>Login goes here</p>
-        <LoginPage />
+        <Login />
         <p>Registration goes here</p>
       </div>
     );
