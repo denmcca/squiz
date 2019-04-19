@@ -21,13 +21,22 @@ export class DueDates extends React.Component {
         // the state stores the list of questions 
         this.state = {
             assignments: [
-                { title: 'Title here', prof: 'Prof here', date: 'Date here', course: 'Course here' },  
-                { title: 'Title here', prof: 'Prof here', date: 'Date here', course: 'Course here' },  
-                { title: 'Title here', prof: 'Prof here', date: 'Date here', course: 'Course here' },  
-                { title: 'Title here', prof: 'Prof here', date: 'Date here', course: 'Course here' }
             ],  
             datesCollapse: true,
         }
+    }
+    componentDidMount() {
+        this.fetchData()
+    }
+    // do a database fetch instead of hardcoding
+    fetchData = async () => {
+        this.setState({
+            assignments: [
+            { title: 'Title here', prof: 'Prof here', date: 'Date here', course: 'Course here' },  
+            { title: 'Title here', prof: 'Prof here', date: 'Date here', course: 'Course here' },  
+            { title: 'Title here', prof: 'Prof here', date: 'Date here', course: 'Course here' },  
+            { title: 'Title here', prof: 'Prof here', date: 'Date here', course: 'Course here' }]
+        })
     }
     render() 
     {

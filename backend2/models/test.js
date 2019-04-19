@@ -10,7 +10,7 @@ const TestSchema = new Schema({
   testName: {
     type: String,
     required: true
-  }
+  },
   questions: {
       type: Array,
       required: false

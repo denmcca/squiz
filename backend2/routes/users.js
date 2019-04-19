@@ -84,8 +84,10 @@ router.post('/login', (req,res,next) => {
     successRedirect:'/',
     failureRedirect:'/login',
     failureFlash: true
-  })(req,res,next);
-});
+  })(req,res,next)
+
+},(req,res) => res.json(res)
+);
 
 // router.get('/login', (req,res)=> {
 //     res.render('login');

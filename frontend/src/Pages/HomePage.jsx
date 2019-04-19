@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import {
   Row,
   Col,
-  Collapse,
-  ListGroup,
-  ListGroupItem,
-  Button,
-  Card,
-  CardBody
 } from 'reactstrap';
+// import DueDates from '../Components/DueDates'
+import CourseList from '../Components/CourseList'
+import UserInfo from '../Components/UserInfo'
+import RecentGrades from '../Components/RecentGrades'
+import Announcements from '../Components/Announcements'
 
-import {DueDatesTable, DueDates} from '../Components/DueDates';
+import { DueDatesTable, DueDates } from '../Components/DueDates';
 export default class HomePage extends Component {
   constructor() {
     super();
@@ -21,43 +20,30 @@ export default class HomePage extends Component {
     }
   }
   displayCourse() {
-
+    this.setState({ courseCollapse: !this.state.courseCollapse });
   }
   render() {
     return (
-      <Row>
+      <Row style = {{marginLeft: 3, marginRight: 3}}>
         {/* Courses list */}
         <Col className="course-List">
-
-          <ListGroup>
-            <Button onClick={this.displayCourse}>
-              Courses
-            </Button>
-            <Collapse isOpen={this.state.courseCollapse}>
-              {
-                // Display the list of questions that have been added to the list
-                this.state.courses.map((val, idx) => {
-                  return (
-                    <ListGroupItem>
-                      {this.state.courses[idx].courseName}
-                    </ListGroupItem>
-                  )
-                })
-              }
-            </Collapse>
-
-          </ListGroup>
+          <br />
+          <UserInfo />
+          <CourseList />
         </Col>
         {/* Recent Grades */}
-        <Col className="recent-Grades">
-          Recent Grades
+        <Col className="recent-Grades" xs = "2">
+          <br />
+          <RecentGrades />
         </Col>
         {/* Announcements */}
         <Col className="announcements">
-          Announcements
+          <br />
+          <Announcements />
         </Col>
         {/* Due Dates */}
         <Col className="due-Dates">
+          <br />
           <DueDatesTable />
           {/* <DueDates /> */}
         </Col>

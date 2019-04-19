@@ -19,35 +19,37 @@ import {
 import { connect } from 'react-redux';
 
 class CreateQuizPage extends Component {
-  // constructor() {
-  //   super();
-  //   // the state stores the list of questions 
-  //   this.state = {
-  //     questions: [
-  //       {
-  //         question: "Seven properties associated with life",
-  //         optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
-  //         optionTwo: "Donec rutrum placerat gravida.",
-  //         optionThree: "Quisque iaculis tellus eget.",
-  //         optionFour: "Fusce blandit justo sit.",
-  //         rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
-  //       },
-  //     ],
-  //     question: "",
-  //     optionOne: "",
-  //     optionTwo: "",
-  //     optionThree: "",
-  //     optionFour: "",
-  //     rightAnswer: "",
-  //     addPrompt: false,
-  //   }
-  //   // listeners
-  //   //this.handleInputChange = this.handleInputChange.bind(this);
-  //   //this.handleSubmit = this.handleSubmit.bind(this);
-  // }
+  constructor() {
+    super();
+    // the state stores the list of questions 
+    this.state = {
+      questions: [
+        {
+          // Debug testing - starting with a given array of question
+          // question: "Seven properties associated with life",
+          // optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
+          // optionTwo: "Donec rutrum placerat gravida.",
+          // optionThree: "Quisque iaculis tellus eget.",
+          // optionFour: "Fusce blandit justo sit.",
+          // rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
+        },
+      ],
+      question: "",
+      optionOne: "",
+      optionTwo: "",
+      optionThree: "",
+      optionFour: "",
+      rightAnswer: "",
+      addPrompt: false,
+    }
+    // listeners
+    //this.handleInputChange = this.handleInputChange.bind(this);
+    //this.handleSubmit = this.handleSubmit.bind(this);
+  }
   // adding a question to the list
   addQuestion = (e) => {
-    if (this.props.rightAnswer !== "") {
+    // if the right answer is not empty, then add the question
+    if (this.state.rightAnswer !== "") {
       this.setState((prevState) => ({
         // add a new set of question to the list
         questions: [...prevState.questions,
@@ -62,28 +64,36 @@ class CreateQuizPage extends Component {
         optionThree: "",
         optionFour: "",
         rightAnswer: "",
-        // disable prompt
+        // disable prompt (close the modal)
         addPrompt: false
       }));
     } else {
+      // prompt user to add the right answer
       alert("Please input the Answer");
     }
     console.log(this.props.questions);
   }
+  // remove a question from the list
+  // arg: index of the question to be removed
   removeQuestion(index) {
     var newQuestionList = [...this.props.questions];
     if (index !== -1) {
+      // remove the given index
       newQuestionList.splice(index, 1);
+      // update the state variable
       this.setState({ questions: newQuestionList });
     }
   }
+  // toggles the modal for adding the question
   toggleAddPrompt() {
     this.setState({ addPrompt: false });
   }
+  // the displayed page
   render() {
     return (
       <div className="container">
-        <Modal isOpen={this.props.addPrompt}>
+        {/* The Prompt for adding a question, its a modal or a 'pop-up' */}
+        <Modal isOpen={this.state.addPrompt}>
           <ModalHeader>Add A Question</ModalHeader>
           <ModalBody>
 
@@ -142,6 +152,7 @@ class CreateQuizPage extends Component {
             <Button onClick={() => this.setState({ addPrompt: false })}>Cancel</Button>
           </ModalFooter>
         </Modal>
+        {/* The display of the page without the prompt */}
         <Form>
           <legend> Create A Quiz </legend>
 
