@@ -1,4 +1,4 @@
-import { SET_QUESTION } from "../actions/types";
+import { SUBMIT_QUESTION, REMOVE_QUESTION } from "../actions/types";
 
 const initialState = { 
     questions: [
@@ -16,10 +16,16 @@ const initialState = {
 const quizReducer = (state = initialState, action) => {
     const newState = {...state};
     switch(action.type) {
-        case SET_QUESTION:
+        case SUBMIT_QUESTION:
             return {
-                ...state,
-                questions: action.value
+                ...state, 
+                // code here
+            }
+        case REMOVE_QUESTION:
+            return {
+                ...state, 
+                // code here
+
             }
         default:
             return state;

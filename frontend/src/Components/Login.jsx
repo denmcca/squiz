@@ -7,46 +7,64 @@ import {
     FormGroup, 
     Label, 
     Input, 
-    FormText 
+    FormText,
+    NavLink,
+    NavItem 
 } from 'reactstrap';
-import SquizLogo from '../squiz logo.png';
+
+// import SquizLogo from '../squiz logo.png';
 import { connect } from 'react-redux';
 
 class Login extends React.Component {
+    // function validateLoginCredentials = (props) => {
+    //     // validate login
+    //     // if false return false
+    //     props.logUserIn();
+    //     // if true 
+    //     // return true;
+    // }
+
   render() {  
     return (
-        <Form width="50%">
-            <FormGroup row>
-                <Label for="exampleEmail" sm={2}>Email</Label>
-                <Col sm={10}>
-                    <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
-                </Col>
-            </FormGroup>
-            <FormGroup row>
-                <Label for="examplePassword" sm={2}>Password</Label>
-                <Col sm={10}>
-                    <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
-                </Col>
-            </FormGroup>
-            <FormGroup check row>
-                <Col sm={{ size: 10, offset: 2 }}>
-                    <Button onClick={ function() { alert('click');}}>Submit</Button>
-                </Col>
-            </FormGroup>
-        </Form>
+        <div style={{display: 'flex', justifyContent: 'center'}}>   
+            <Form>
+                <FormGroup row>
+                    <Col sm={15}>
+                        <Input type="email" name="email" id="userEmail" placeholder="Enter email" />
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
+                    <Col sm={15}>
+                        <Input type="password" name="password" id="userPassword" placeholder="Enter password" />
+                    </Col>
+                </FormGroup>
+                <FormGroup check row>
+                    <Col offset={7}>
+                        <Button onClick={() => this.props.logUserIn()}>Submit</Button>
+                    </Col>
+                </FormGroup>
+            </Form>
+        </div>
     );
   }
 }
 
+const onSubmitClicked = (...props) => {
+    // updateEmail()
+}
+
 const mapStateToProps = (state) => {
     return {
-        userName: state.userName,
-        password: state.password // placeholder
+        isLoggedIn: state.rLogin.isLoggedIn,
+        email: state.rUser.email,
+        password: state.rUser.password // placeholder
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         logUserIn: () => dispatch({type:'LOGIN'}),
+        updateEmail: () => dispatch({type:'UPDATE_EMAIL'}),
+        updatePassword: () => dispatch({type:'UPDATE_PASSWORD'})
     }
 };
 

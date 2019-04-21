@@ -3,6 +3,7 @@ import {
   Row,
   Col,
 } from 'reactstrap';
+import { connect } from 'react-redux';
 // import DueDates from '../Components/DueDates'
 import CourseList from '../Components/CourseList'
 import UserInfo from '../Components/UserInfo'
@@ -10,7 +11,7 @@ import RecentGrades from '../Components/RecentGrades'
 import Announcements from '../Components/Announcements'
 
 import { DueDatesTable, DueDates } from '../Components/DueDates';
-export default class HomePage extends Component {
+class HomePage extends Component {
   constructor() {
     super();
     // the state stores the list of questions 
@@ -51,3 +52,21 @@ export default class HomePage extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return (
+    {
+      isLoggedIn: state.rLogin.isLoggedIn
+    }
+  )
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return (
+    {
+
+    }
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

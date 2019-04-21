@@ -2,12 +2,14 @@ import React from "react";
 import {connect} from 'react-redux';
 import PropTypes  from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import Login from '../Components/Login'
 import {loginUser} from '../actions/authentication';
+import SquizLogo from '../squiz logo.png';
 import Form from 'react';
 import Button from 'react';
 
 
-class Login extends React.Component {
+class LoginPage extends React.Component {
   // constructor(props) {
   //   super(props);
   //   // this.toggleIsLoggedIn = this.props.toggleIsLoggedIn();
@@ -40,59 +42,62 @@ class Login extends React.Component {
   }
 
   render() {
-    
     console.log("Rendering LoginPage ");
     return (
-      <div className="container" style={{ marginTop: "50px" }}>
-        <h2 style={{ marginBottom: "40px" }}>Login</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Username"
-              className="form-control"
-              name="username"
-              onChange={this.handleInputChange}
-              value={this.props.email}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              placeholder="Password"
-              className="form-control"
-              name="password"
-              onChange={this.handleInputChange}
-              value={this.props.password}
-            />
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary" onClick={this.props.loginUser}>
-              Login User
-            </button>
-          </div>
-        </form>
-        {/* <Form>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group controlId="formBasicChecbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>; */}
+      <div align='center' class='bg-size'>
+        <img src={SquizLogo} alt="Squiz" width="500"/>
+        <Login/>
       </div>
+      // <div className="container" style={{ marginTop: "50px" }}>
+      //   <h2 style={{ marginBottom: "40px" }}>Login</h2>
+      //   <form onSubmit={this.handleSubmit}>
+      //     <div className="form-group">
+      //       <input
+      //         type="text"
+      //         placeholder="Username"
+      //         className="form-control"
+      //         name="username"
+      //         onChange={this.handleInputChange}
+      //         value={this.props.email}
+      //       />
+      //     </div>
+      //     <div className="form-group">
+      //       <input
+      //         type="password"
+      //         placeholder="Password"
+      //         className="form-control"
+      //         name="password"
+      //         onChange={this.handleInputChange}
+      //         value={this.props.password}
+      //       />
+      //     </div>
+      //     <div className="form-group">
+      //       <button type="submit" className="btn btn-primary" onClick={this.props.loginUser}>
+      //         Login User
+      //       </button>
+      //     </div>
+      //   </form>
+      //   {/* <Form>
+      //     <Form.Group controlId="formBasicEmail">
+      //       <Form.Label>Email address</Form.Label>
+      //       <Form.Control type="email" placeholder="Enter email" />
+      //       <Form.Text className="text-muted">
+      //         We'll never share your email with anyone else.
+      //       </Form.Text>
+      //     </Form.Group>
+
+      //     <Form.Group controlId="formBasicPassword">
+      //       <Form.Label>Password</Form.Label>
+      //       <Form.Control type="password" placeholder="Password" />
+      //     </Form.Group>
+      //     <Form.Group controlId="formBasicChecbox">
+      //       <Form.Check type="checkbox" label="Check me out" />
+      //     </Form.Group>
+      //     <Button variant="primary" type="submit">
+      //       Submit
+      //     </Button>
+      //   </Form>; */}
+      // </div>
     );
   }
 }
@@ -103,9 +108,9 @@ Login.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn:state.isLoggedIn,
-    email:state.email,
-    password:state.password
+    isLoggedIn:state.rLogin.isLoggedIn,
+    email:state.rLogin.email,
+    password:state.rLogin.password
   }
 };
 
@@ -118,4 +123,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginPage));

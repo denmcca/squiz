@@ -28,6 +28,7 @@ export default class CourseList extends Component {
         this.setState({ courseCollapse: !this.state.courseCollapse });
     }
     render() {
+        console.log('Rendering CourseList')
         return (
             <ListGroup>
                 <Button onClick={this.displayCourse.bind(this)} className="course-List-Button">

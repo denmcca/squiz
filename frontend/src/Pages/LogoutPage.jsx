@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SquizLogo from '../squiz logo.png';
-
+import { connect } from 'react-redux';
 
 // import React from 'react';
 // import { Alert } from 'reactstrap';
@@ -18,14 +18,26 @@ class Logout extends Component {
       <div className="bg-size">
         <img src={SquizLogo} alt="Squiz" width="500"/>
         <p>You have been logged out.</p>
-        <a href='/Welcome/'>Click here to login.</a>
+        <a href='/Welcome/' onClick={this.props.logInUser}>Click here to login.</a>
         {/* <Example /> */}
       </div>
     );
   }
 }
 
-export default Logout;
+const mapStateToProps = (state) => {
+  return ({
+    isLoggedIn:state.rLogin.isLoggedIn,
+  });
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return({
+    logInUser: () => dispatch({type:'LOGIN'})
+  });
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);
 
 
 // const Example = (props) => {

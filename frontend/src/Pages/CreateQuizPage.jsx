@@ -19,37 +19,37 @@ import {
 import { connect } from 'react-redux';
 
 class CreateQuizPage extends Component {
-  constructor() {
-    super();
-    // the state stores the list of questions 
-    this.state = {
-      questions: [
-        {
-          // Debug testing - starting with a given array of question
-          // question: "Seven properties associated with life",
-          // optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
-          // optionTwo: "Donec rutrum placerat gravida.",
-          // optionThree: "Quisque iaculis tellus eget.",
-          // optionFour: "Fusce blandit justo sit.",
-          // rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
-        },
-      ],
-      question: "",
-      optionOne: "",
-      optionTwo: "",
-      optionThree: "",
-      optionFour: "",
-      rightAnswer: "",
-      addPrompt: false,
-    }
-    // listeners
-    //this.handleInputChange = this.handleInputChange.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   // the state stores the list of questions 
+  //   this.state = {
+  //     questions: [
+  //       {
+  //         // Debug testing - starting with a given array of question
+  //         // question: "Seven properties associated with life",
+  //         // optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
+  //         // optionTwo: "Donec rutrum placerat gravida.",
+  //         // optionThree: "Quisque iaculis tellus eget.",
+  //         // optionFour: "Fusce blandit justo sit.",
+  //         // rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
+  //       },
+  //     ],
+  //     question: "",
+  //     optionOne: "",
+  //     optionTwo: "",
+  //     optionThree: "",
+  //     optionFour: "",
+  //     rightAnswer: "",
+  //     addPrompt: false,
+  //   }
+  //   // listeners
+  //   //this.handleInputChange = this.handleInputChange.bind(this);
+  //   //this.handleSubmit = this.handleSubmit.bind(this);
+  // }
   // adding a question to the list
   addQuestion = (e) => {
     // if the right answer is not empty, then add the question
-    if (this.state.rightAnswer !== "") {
+    if (this.props.rightAnswer !== "") {
       this.setState((prevState) => ({
         // add a new set of question to the list
         questions: [...prevState.questions,
@@ -71,6 +71,7 @@ class CreateQuizPage extends Component {
       // prompt user to add the right answer
       alert("Please input the Answer");
     }
+    console.log("Create Quiz Page");
     console.log(this.props.questions);
   }
   // remove a question from the list
@@ -91,9 +92,9 @@ class CreateQuizPage extends Component {
   // the displayed page
   render() {
     return (
-      <div className="container">
+      <div className="app-size" align='center'>
         {/* The Prompt for adding a question, its a modal or a 'pop-up' */}
-        <Modal isOpen={this.state.addPrompt}>
+        <Modal isOpen={this.props.addPrompt}>
           <ModalHeader>Add A Question</ModalHeader>
           <ModalBody>
 
@@ -153,21 +154,22 @@ class CreateQuizPage extends Component {
           </ModalFooter>
         </Modal>
         {/* The display of the page without the prompt */}
-        <Form>
+        <Form >
           <legend> Create A Quiz </legend>
 
           <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
           <br />
           <br />
-          <Button>Submit Quiz</Button>
+          {/* <Button>Submit Quiz</Button> */}
+          <Button onClick={() => this.props.sumbitQuestion()}>Submit Quiz</Button>
           <br />
-          <Row>
+          <Row align='center' margin={100}>
             {
               // Display the list of questions that have been added to the list
               this.props.questions.map((val, idx) => {
                 let questionID = `question-${idx}`
                 return (
-                  <Col xs={6}>
+                  <Col align='center' margin={100}>
                     <div key={idx}>
                       {/** Label of the question */}
 
@@ -209,21 +211,22 @@ class CreateQuizPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn:state.isLoggedIn,
-    questions:state.questions,
-    question:state.question,
-    optionOne:state.optionOne,
-    optionTwo:state.optionTwo,
-    optionThree:state.optionThree,
-    optionFour:state.optionFour,
-    rightAnswer:state.rightAnswer,
-    addPrompt:state.addPrompt
+    isLoggedIn:state.rLogin.isLoggedIn,
+    questions:state.rQuiz.questions,
+    question:state.rQuiz.question,
+    optionOne:state.rQuiz.optionOne,
+    optionTwo:state.rQuiz.optionTwo,
+    optionThree:state.rQuiz.optionThree,
+    optionFour:state.rQuiz.optionFour,
+    rightAnswer:state.rQuiz.rightAnswer,
+    addPrompt:state.rQuiz.addPrompt
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // logUserOut: () => dispatch({type: 'LOGOUT'})
+    sumbitQuestion: () => dispatch({type: 'SUBMIT_QUESTION'}),
+    removeQuestion: () => dispatch({type: 'REMOVE_QUESTION'})
   }
 };
 
