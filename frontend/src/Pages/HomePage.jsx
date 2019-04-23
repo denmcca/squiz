@@ -23,8 +23,13 @@ class HomePage extends Component {
   displayCourse() {
     this.setState({ courseCollapse: !this.state.courseCollapse });
   }
+    logout() {
+        firebase.auth().signOut();
+    }
+
   render() {
     return (
+        <div>
       <Row style = {{marginLeft: 3, marginRight: 3}}>
         {/* Courses list */}
         <Col className="course-List">
@@ -49,6 +54,8 @@ class HomePage extends Component {
           {/* <DueDates /> */}
         </Col>
       </Row>
+            <button onClick={this.logout}>Logout</button>
+        </div>
     )
   }
 }

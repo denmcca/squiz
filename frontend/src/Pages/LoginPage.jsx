@@ -23,14 +23,16 @@ class LoginPage extends React.Component {
   //   this.handleSubmit = this.handleSubmit.bind(this);
   // }
 
-  handleInputChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
+  login(e) {
+    e.preventDefault();
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    }).catch((error) => {
+      console.log(error);
     });
     this.props.setEmail(e.taget.value)
   }
 
-  handleSubmit(e) {
+  signup(e){
     e.preventDefault();
     // const user = {
     //   username: this.props.username,
@@ -40,7 +42,6 @@ class LoginPage extends React.Component {
     this.props.setEmail(e.target.value);
     this.props.setPassword(e.target.value);
   }
-
   render() {
     console.log("Rendering LoginPage ");
     return (

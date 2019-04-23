@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import fire from './firebase'
 // import { Container, Row, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Welcome from "./Pages/Welcome";
