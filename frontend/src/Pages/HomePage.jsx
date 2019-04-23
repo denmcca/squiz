@@ -9,7 +9,7 @@ import CourseList from '../Components/CourseList'
 import UserInfo from '../Components/UserInfo'
 import RecentGrades from '../Components/RecentGrades'
 import Announcements from '../Components/Announcements'
-
+import firebase from 'firebase'
 import { DueDatesTable, DueDates } from '../Components/DueDates';
 class HomePage extends Component {
   constructor() {

@@ -89,6 +89,9 @@ class CreateQuizPage extends Component {
   toggleAddPrompt() {
     this.setState({ addPrompt: false });
   }
+  sumbitQuestion() {
+    
+  }
   // the displayed page
   render() {
     return (

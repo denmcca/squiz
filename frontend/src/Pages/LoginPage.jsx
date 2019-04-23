@@ -7,7 +7,7 @@ import {loginUser} from '../actions/authentication';
 import SquizLogo from '../squiz logo.png';
 import Form from 'react';
 import Button from 'react';
-
+import firebase from 'firebase'
 
 class LoginPage extends React.Component {
   // constructor(props) {
