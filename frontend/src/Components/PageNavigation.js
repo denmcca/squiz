@@ -18,13 +18,17 @@ import {
 import SquizLogo from '../squiz logo.png';
 import { connect } from 'react-redux';
 import {Link, NavLink} from 'react-router-dom';
-
+import firebase from 'firebase'
 class PageNavigation extends Component {
   shouldComponentUpdate = (state, props) => {
     console.log("Should component be updated: "/*+ state.isDropDownOpen + ' ' + this.props.isDropDownOpen*/);
     return true;
   }
-  
+  logOut(){
+      firebase.auth().signOut();
+      alert("Logged off")
+      this.props.logUserOut();
+  }
   render() {
     // let isDropDownOpen = false;
     console.log("PageNavigation: " + this.props.isLoggedIn);
@@ -35,7 +39,7 @@ class PageNavigation extends Component {
     loginRoute = this.props.isLoggedIn ? "/login" : "/login";
     console.log("loginRoute: " + loginRoute);
     loginMoreRoutes = this.props.isLoggedIn ? displayMoreRoutes() : null;
-
+    
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -49,7 +53,7 @@ class PageNavigation extends Component {
               {this.props.isLoggedIn ? displayMoreRoutes(this.props.isDropDownOpen) : null}
               <NavItem className='navlink-format' className='navlink-format'>
                 <NavLink className="font2" to={loginRoute} 
-                            onClick={this.props.isLoggedIn ? this.props.logUserOut : this.props.logUserIn}
+                            onClick={this.props.isLoggedIn ? this.logOut.bind(this) : this.props.logUserIn}
                             activeStyle={navLinkStyles.activeStyle}
                             style={navLinkStyles.defaultStyle}>
                   {loginText}

@@ -23,14 +23,7 @@ class LoginPage extends React.Component {
   //   this.handleSubmit = this.handleSubmit.bind(this);
   // }
 
-  login(e) {
-    e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-    }).catch((error) => {
-      console.log(error);
-    });
-    this.props.setEmail(e.taget.value)
-  }
+
 
   signup(e){
     e.preventDefault();
