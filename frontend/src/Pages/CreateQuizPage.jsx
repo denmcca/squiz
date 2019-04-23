@@ -49,13 +49,13 @@ class CreateQuizPage extends Component {
   // adding a question to the list
   addQuestion = (e) => {
     // if the right answer is not empty, then add the question
-    if (this.props.rightAnswer !== "") {
+    if (this.state.rightAnswer !== "") {
       this.setState((prevState) => ({
         // add a new set of question to the list
         questions: [...prevState.questions,
         {
-          question: this.props.question, optionOne: this.props.optionOne, optionTwo: this.props.optionTwo,
-          optionThree: this.props.optionThree, optionFour: this.props.optionFour, rightAnswer: this.props.rightAnswer
+          question: this.state.question, optionOne: this.state.optionOne, optionTwo: this.state.optionTwo,
+          optionThree: this.state.optionThree, optionFour: this.state.optionFour, rightAnswer: this.state.rightAnswer
         }],
         // clear previous inputs
         question: "",
@@ -72,12 +72,12 @@ class CreateQuizPage extends Component {
       alert("Please input the Answer");
     }
     console.log("Create Quiz Page");
-    console.log(this.props.questions);
+    console.log(this.state.questions);
   }
   // remove a question from the list
   // arg: index of the question to be removed
   removeQuestion(index) {
-    var newQuestionList = [...this.props.questions];
+    var newQuestionList = [...this.state.questions];
     if (index !== -1) {
       // remove the given index
       newQuestionList.splice(index, 1);
@@ -94,7 +94,7 @@ class CreateQuizPage extends Component {
     return (
       <div className="app-size" align='center'>
         {/* The Prompt for adding a question, its a modal or a 'pop-up' */}
-        <Modal isOpen={this.props.addPrompt}>
+        <Modal isOpen={this.state.addPrompt}>
           <ModalHeader>Add A Question</ModalHeader>
           <ModalBody>
 
@@ -103,7 +103,7 @@ class CreateQuizPage extends Component {
               <Input placeholder="Question"
                 onChange={(text) => {
                   this.setState({ question: text.target.value });
-                  console.log(this.props.question);
+                  console.log(this.state.question);
                 }} />
             </FormGroup>
             <FormGroup>
@@ -114,8 +114,8 @@ class CreateQuizPage extends Component {
             <FormGroup tag="answers">
               <legend>Answers</legend>
               <FormGroup check>
-                <Input type="radio" name="radio1" value={this.props.optionOne}
-                  onChange={() => { this.setState({ rightAnswer: this.props.optionOne }) }} />{' '}
+                <Input type="radio" name="radio1" value={this.state.optionOne}
+                  onChange={() => { this.setState({ rightAnswer: this.state.optionOne }) }} />{' '}
                 <Label check>
                   <Input type="textarea" name="optionOne" placeholder="Option One" style={{ width: "240%" }}
                     onChange={(text) => this.setState({ optionOne: text.target.value })} />
@@ -123,24 +123,24 @@ class CreateQuizPage extends Component {
               </FormGroup>
               <FormGroup check>
 
-                <Input type="radio" name="radio1" value={this.props.optionTwo}
-                  onChange={() => { this.setState({ rightAnswer: this.props.optionTwo }) }} />{' '}
+                <Input type="radio" name="radio1" value={this.state.optionTwo}
+                  onChange={() => { this.setState({ rightAnswer: this.state.optionTwo }) }} />{' '}
                 <Label check>
                   <Input type="textarea" name="optionTwo" placeholder="Option Two" style={{ width: "240%" }}
                     onChange={(text) => this.setState({ optionTwo: text.target.value })} />
                 </Label>
               </FormGroup>
               <FormGroup check>
-                <Input type="radio" name="radio1" value={this.props.optionThree}
-                  onChange={() => { this.setState({ rightAnswer: this.props.optionThree }) }} />{' '}
+                <Input type="radio" name="radio1" value={this.state.optionThree}
+                  onChange={() => { this.setState({ rightAnswer: this.state.optionThree }) }} />{' '}
                 <Label check>
                   <Input type="textarea" name="optionThree" placeholder="Option Three" style={{ width: "240%" }}
                     onChange={(text) => this.setState({ optionThree: text.target.value })} />
                 </Label>
               </FormGroup>
               <FormGroup check>
-                <Input type="radio" name="radio1" value={this.props.optionFour}
-                  onChange={() => { this.setState({ rightAnswer: this.props.optionFour }) }} />{' '}
+                <Input type="radio" name="radio1" value={this.state.optionFour}
+                  onChange={() => { this.setState({ rightAnswer: this.state.optionFour }) }} />{' '}
                 <Label check>
                   <Input type="textarea" name="optionFour" placeholder="Option Four" style={{ width: "240%" }}
                     onChange={(text) => this.setState({ optionFour: text.target.value })} />
@@ -161,12 +161,12 @@ class CreateQuizPage extends Component {
           <br />
           <br />
           {/* <Button>Submit Quiz</Button> */}
-          <Button onClick={() => this.props.sumbitQuestion()}>Submit Quiz</Button>
+          <Button onClick={() => this.state.sumbitQuestion()}>Submit Quiz</Button>
           <br />
           <Row align='center' margin={100}>
             {
               // Display the list of questions that have been added to the list
-              this.props.questions.map((val, idx) => {
+              this.state.questions.map((val, idx) => {
                 let questionID = `question-${idx}`
                 return (
                   <Col align='center' margin={100}>
@@ -176,27 +176,26 @@ class CreateQuizPage extends Component {
                       <label htmlFor={questionID} className="questions-List">
                         <ListGroup className="question-Alignment">
                           <ListGroupItem >
-                            {`${idx + 1}`}: {this.props.questions[idx].question}
+                            {`${idx + 1}`}: {this.state.questions[idx].question}
                           </ListGroupItem>
                           <ListGroupItem>
-                            a: {this.props.questions[idx].optionOne}
+                            a: {this.state.questions[idx].optionOne}
                           </ListGroupItem>
                           <ListGroupItem>
-                            b: {this.props.questions[idx].optionTwo}
+                            b: {this.state.questions[idx].optionTwo}
                           </ListGroupItem>
                           <ListGroupItem>
-                            c: {this.props.questions[idx].optionThree}
+                            c: {this.state.questions[idx].optionThree}
                           </ListGroupItem>
                           <ListGroupItem>
-                            d: {this.props.questions[idx].optionFour}
+                            d: {this.state.questions[idx].optionFour}
                           </ListGroupItem>
                           <ListGroupItem>
-                            Answer: {this.props.questions[idx].rightAnswer}
+                            Answer: {this.state.questions[idx].rightAnswer}
                           </ListGroupItem>
                           <Button onClick={() => { this.removeQuestion(idx);}}>Remove Question</Button>
                         </ListGroup>
                       </label>
-
                     </div>
                   </Col>
                 )
@@ -212,14 +211,14 @@ class CreateQuizPage extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn:state.rLogin.isLoggedIn,
-    questions:state.rQuiz.questions,
-    question:state.rQuiz.question,
-    optionOne:state.rQuiz.optionOne,
-    optionTwo:state.rQuiz.optionTwo,
-    optionThree:state.rQuiz.optionThree,
-    optionFour:state.rQuiz.optionFour,
-    rightAnswer:state.rQuiz.rightAnswer,
-    addPrompt:state.rQuiz.addPrompt
+    // questions:state.rQuiz.questions,
+    // question:state.rQuiz.question,
+    // optionOne:state.rQuiz.optionOne,
+    // optionTwo:state.rQuiz.optionTwo,
+    // optionThree:state.rQuiz.optionThree,
+    // optionFour:state.rQuiz.optionFour,
+    // rightAnswer:state.rQuiz.rightAnswer,
+    // addPrompt:state.rQuiz.addPrompt
   }
 };
 
