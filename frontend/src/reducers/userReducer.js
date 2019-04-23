@@ -1,6 +1,8 @@
 import { UPDATE_EMAIL, UPDATE_PASSWORD }  from "../actions/types";
 
-const initialState = { 
+const initialState = {
+    firstName: 'Test',
+    lastName: 'User', 
     email: '',
     password: '', 
 };

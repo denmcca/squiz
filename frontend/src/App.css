@@ -82,8 +82,21 @@
 }
 
 .app-size {
-  width: 100vw; /* changes width of whole section */
-  height: 100vh;
+  width: 97vw; /* changes width of whole section */
+  height: 98vh;
+  align-content: center;
+}
+
+.app-center {
+  /* background: black; */
+  /* color: white; */
+  border-radius: 1em;
+  padding: 1em;
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%) 
 }
 
 .center-content {
@@ -106,6 +119,25 @@
   color: "red";
 }
 
-.form-style {
-  width: '50%';
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.shadow {
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;
+}
+
+.navlink-format {
+  padding-right: 10px;
 }

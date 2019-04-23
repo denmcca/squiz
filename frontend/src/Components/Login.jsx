@@ -11,6 +11,7 @@ import {
     NavLink,
     NavItem 
 } from 'reactstrap';
+import { Route, Redirect } from 'react-router-dom';
 
 // import SquizLogo from '../squiz logo.png';
 import { connect } from 'react-redux';
@@ -23,6 +24,10 @@ class Login extends React.Component {
     //     // if true 
     //     // return true;
     // }
+
+    showAlert() {
+        alert("Im an alert");
+      }
 
   render() {  
     return (
@@ -40,7 +45,7 @@ class Login extends React.Component {
                 </FormGroup>
                 <FormGroup check row>
                     <Col offset={7}>
-                        <Button onClick={() => this.props.logUserIn()}>Submit</Button>
+                        <button type="submit" className="btn btn-primary" onClick={this.props.logUserIn}>Submit</button>
                     </Col>
                 </FormGroup>
             </Form>
@@ -49,9 +54,7 @@ class Login extends React.Component {
   }
 }
 
-const onSubmitClicked = (...props) => {
-    // updateEmail()
-}
+
 
 const mapStateToProps = (state) => {
     return {

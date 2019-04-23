@@ -20,6 +20,11 @@ import { connect } from 'react-redux';
 import {Link, NavLink} from 'react-router-dom';
 
 class PageNavigation extends Component {
+  shouldComponentUpdate = (state, props) => {
+    console.log("Should component be updated: "/*+ state.isDropDownOpen + ' ' + this.props.isDropDownOpen*/);
+    return true;
+  }
+  
   render() {
     // let isDropDownOpen = false;
     console.log("PageNavigation: " + this.props.isLoggedIn);
@@ -30,7 +35,7 @@ class PageNavigation extends Component {
     loginRoute = this.props.isLoggedIn ? "/login" : "/login";
     console.log("loginRoute: " + loginRoute);
     loginMoreRoutes = this.props.isLoggedIn ? displayMoreRoutes() : null;
-    
+
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -42,7 +47,7 @@ class PageNavigation extends Component {
           <Collapse className="font1" isOpen={this.props.isDropDownOpen} navbar>
             <Nav className="ml-auto" navbar>
               {this.props.isLoggedIn ? displayMoreRoutes(this.props.isDropDownOpen) : null}
-              <NavItem>
+              <NavItem className='navlink-format' className='navlink-format'>
                 <NavLink className="font2" to={loginRoute} 
                             onClick={this.props.isLoggedIn ? this.props.logUserOut : this.props.logUserIn}
                             activeStyle={navLinkStyles.activeStyle}
@@ -50,11 +55,11 @@ class PageNavigation extends Component {
                   {loginText}
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem className='navlink-format'>
                 <NavLink className="font2" to={this.props.isLoggedIn ? '/' : '/register'} 
                             activeStyle={navLinkStyles.activeStyle}
                             style={navLinkStyles.defaultStyle}>
-                  {this.props.isLoggedIn ? '' : '/Register'}
+                  {this.props.isLoggedIn ? '' : 'Register'}
                 </NavLink>
               </NavItem>
             </Nav>
@@ -86,27 +91,27 @@ function displayMoreRoutes(isDropDownOpen){
   // }
   return (
     <Nav>
-      <NavItem>
+      <NavItem className='navlink-format'>
         <NavLink to="/dash" 
           activeStyle={navLinkStyles.activeStyle}
           style={navLinkStyles.defaultStyle}>Dash</NavLink>
       </NavItem>
-      <NavItem>    
+      <NavItem className='navlink-format'>    
         <NavLink to="/quizzes/"
           activeStyle={navLinkStyles.activeStyle}
           style={navLinkStyles.defaultStyle}>Quizzes</NavLink>
         </NavItem>
-      <NavItem>  
+      <NavItem className='navlink-format'>  
         <NavLink to="/createquiz/"
           activeStyle={navLinkStyles.activeStyle}
           style={navLinkStyles.defaultStyle}>Create Quiz</NavLink>
       </NavItem>
-      <NavItem>
+      <NavItem className='navlink-format'>
         <NavLink to="/grades/"
             activeStyle={navLinkStyles.activeStyle}
             style={navLinkStyles.defaultStyle}>My Grades</NavLink>
       </NavItem>
-      <NavItem>
+      <NavItem className='navlink-format'>
         <NavLink to="/settings/"
             activeStyle={navLinkStyles.activeStyle}
             style={navLinkStyles.defaultStyle}>Settings</NavLink>
@@ -114,7 +119,7 @@ function displayMoreRoutes(isDropDownOpen){
         <Collapse className="font1" isOpen={isDropDownOpen} navbar>
 
       <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav caret style={navLinkStyles.dropdownStyle}>
+        <DropdownToggle nav caret style={navLinkStyles.dropdownStyle} className='navlink-format'>
           Classes
         </DropdownToggle>
         <DropdownMenu right>

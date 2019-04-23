@@ -30,31 +30,33 @@ export default class CourseList extends Component {
     render() {
         console.log('Rendering CourseList')
         return (
-            <ListGroup>
-                <Button onClick={this.displayCourse.bind(this)} className="course-List-Button">
+            <div className='shadow'>
+                <ListGroup>
+                    <Button onClick={this.displayCourse.bind(this)} className="course-List-Button">
 
-                    <div style={this.state.courseCollapse ? { display: '' } : { display: 'none' }}>
-                        Courses
-                <IoIosArrowDown></IoIosArrowDown>
-                    </div>
-                    <div style={this.state.courseCollapse ? { display: 'none' } : { display: '' }}>
-                        Courses
-                <IoIosArrowForward></IoIosArrowForward>
-                    </div>
-                </Button>
-                <Collapse isOpen={this.state.courseCollapse}>
-                    {
-                        // Display the list of questions that have been added to the list
-                        this.state.courses.map((val, idx) => {
-                            return (
-                                <ListGroupItem>
-                                    {this.state.courses[idx].courseName}
-                                </ListGroupItem>
-                            )
-                        })
-                    }
-                </Collapse>
-            </ListGroup>
+                        <div style={this.state.courseCollapse ? { display: '' } : { display: 'none' }}>
+                            Courses
+                    <IoIosArrowDown></IoIosArrowDown>
+                        </div>
+                        <div style={this.state.courseCollapse ? { display: 'none' } : { display: '' }}>
+                            Courses
+                    <IoIosArrowForward></IoIosArrowForward>
+                        </div>
+                    </Button>
+                    <Collapse isOpen={this.state.courseCollapse}>
+                        {
+                            // Display the list of questions that have been added to the list
+                            this.state.courses.map((val, idx) => {
+                                return (
+                                    <ListGroupItem>
+                                        {this.state.courses[idx].courseName}
+                                    </ListGroupItem>
+                                )
+                            })
+                        }
+                    </Collapse>
+                </ListGroup>
+            </div>
         )
     }
 }

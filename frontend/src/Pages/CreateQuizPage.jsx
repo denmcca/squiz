@@ -19,33 +19,33 @@ import {
 import { connect } from 'react-redux';
 
 class CreateQuizPage extends Component {
-  // constructor() {
-  //   super();
-  //   // the state stores the list of questions 
-  //   this.state = {
-  //     questions: [
-  //       {
-  //         // Debug testing - starting with a given array of question
-  //         // question: "Seven properties associated with life",
-  //         // optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
-  //         // optionTwo: "Donec rutrum placerat gravida.",
-  //         // optionThree: "Quisque iaculis tellus eget.",
-  //         // optionFour: "Fusce blandit justo sit.",
-  //         // rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
-  //       },
-  //     ],
-  //     question: "",
-  //     optionOne: "",
-  //     optionTwo: "",
-  //     optionThree: "",
-  //     optionFour: "",
-  //     rightAnswer: "",
-  //     addPrompt: false,
-  //   }
-  //   // listeners
-  //   //this.handleInputChange = this.handleInputChange.bind(this);
-  //   //this.handleSubmit = this.handleSubmit.bind(this);
-  // }
+  constructor() {
+    super();
+    // the state stores the list of questions 
+    this.state = {
+      questions: [
+        {
+          // Debug testing - starting with a given array of question
+          question: "Seven properties associated with life",
+          optionOne: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption.",
+          optionTwo: "Donec rutrum placerat gravida.",
+          optionThree: "Quisque iaculis tellus eget.",
+          optionFour: "Fusce blandit justo sit.",
+          rightAnswer: "order, reproduction, growth and development, energy processing, response to the environment, regulation, evloutionary adaption."
+        },
+      ],
+      question: "",
+      optionOne: "",
+      optionTwo: "",
+      optionThree: "",
+      optionFour: "",
+      rightAnswer: "",
+      addPrompt: false,
+    }
+    // listeners
+    // this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+  }
   // adding a question to the list
   addQuestion = (e) => {
     // if the right answer is not empty, then add the question
@@ -193,7 +193,7 @@ class CreateQuizPage extends Component {
                           <ListGroupItem>
                             Answer: {this.props.questions[idx].rightAnswer}
                           </ListGroupItem>
-                          <Button onClick={() => { this.removeQuestion(idx); }}>Remove Question</Button>
+                          <Button onClick={() => { this.removeQuestion(idx);}}>Remove Question</Button>
                         </ListGroup>
                       </label>
 

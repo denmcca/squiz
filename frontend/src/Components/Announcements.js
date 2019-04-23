@@ -26,32 +26,34 @@ export default class Announcements extends Component {
     }
     render() {
         return (
-            <ListGroup>
-                <ListGroupItem>
-                    <font size="4">
-                        <b>Announcements</b>
-                    </font>
-                    <div style = {{height: 400, overflow: "auto"}}>
-                        {
-                            // Display the list of questions that have been added to the list
-                            this.state.announcements.map((val, idx) => {
-                                return (
-                                    <ListGroupItem>
-                                        <font size="3">
-                                            <b>{this.state.announcements[idx].courseName}</b>
-                                            <br />
-                                        </font>
-                                        <font size="2">
-                                            {this.state.announcements[idx].announcementName}<br />
-                                            {this.state.announcements[idx].info}<br />
-                                        </font>
-                                    </ListGroupItem>
-                                )
-                            })
-                        }
-                    </div>
-                </ListGroupItem>
-            </ListGroup>
+            <div className='shadow'>
+                <ListGroup>
+                    <ListGroupItem>
+                        <font size="4">
+                            <b>Announcements</b>
+                        </font>
+                        <div style = {{height: 400, overflow: "auto"}}>
+                            {
+                                // Display the list of questions that have been added to the list
+                                this.state.announcements.map((val, idx) => {
+                                    return (
+                                        <ListGroupItem>
+                                            <font size="3">
+                                                <b>{this.state.announcements[idx].courseName}</b>
+                                                <br />
+                                            </font>
+                                            <font size="2">
+                                                {this.state.announcements[idx].announcementName}<br />
+                                                {this.state.announcements[idx].info}<br />
+                                            </font>
+                                        </ListGroupItem>
+                                    )
+                                })
+                            }
+                        </div>
+                    </ListGroupItem>
+                </ListGroup>
+            </div>
         )
     }
 }
