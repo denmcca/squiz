@@ -96,116 +96,118 @@ class CreateQuizPage extends Component {
   render() {
     return (
       <div className="app-size" align='center'>
-        {/* The Prompt for adding a question, its a modal or a 'pop-up' */}
-        <Modal isOpen={this.state.addPrompt}>
-          <ModalHeader>Add A Question</ModalHeader>
-          <ModalBody>
+        <div className='shadow'>
+          {/* The Prompt for adding a question, its a modal or a 'pop-up' */}
+          <Modal isOpen={this.state.addPrompt}>
+            <ModalHeader>Add A Question</ModalHeader>
+            <ModalBody>
 
-            <FormGroup>
-              <legend>Question</legend>
-              <Input placeholder="Question"
-                onChange={(text) => {
-                  this.setState({ question: text.target.value });
-                  console.log(this.state.question);
-                }} />
-            </FormGroup>
-            <FormGroup>
-              <FormText color="muted">
-                Write the quiz question above, and then select the correct answer by selecting the radiobutton on its side.
-        </FormText>
-            </FormGroup>
-            <FormGroup tag="answers">
-              <legend>Answers</legend>
-              <FormGroup check>
-                <Input type="radio" name="radio1" value={this.state.optionOne}
-                  onChange={() => { this.setState({ rightAnswer: this.state.optionOne }) }} />{' '}
-                <Label check>
-                  <Input type="textarea" name="optionOne" placeholder="Option One" style={{ width: "240%" }}
-                    onChange={(text) => this.setState({ optionOne: text.target.value })} />
-                </Label>
+              <FormGroup>
+                <legend>Question</legend>
+                <Input placeholder="Question"
+                  onChange={(text) => {
+                    this.setState({ question: text.target.value });
+                    console.log(this.state.question);
+                  }} />
               </FormGroup>
-              <FormGroup check>
+              <FormGroup>
+                <FormText color="muted">
+                  Write the quiz question above, and then select the correct answer by selecting the radiobutton on its side.
+          </FormText>
+              </FormGroup>
+              <FormGroup tag="answers">
+                <legend>Answers</legend>
+                <FormGroup check>
+                  <Input type="radio" name="radio1" value={this.state.optionOne}
+                    onChange={() => { this.setState({ rightAnswer: this.state.optionOne }) }} />{' '}
+                  <Label check>
+                    <Input type="textarea" name="optionOne" placeholder="Option One" style={{ width: "240%" }}
+                      onChange={(text) => this.setState({ optionOne: text.target.value })} />
+                  </Label>
+                </FormGroup>
+                <FormGroup check>
 
-                <Input type="radio" name="radio1" value={this.state.optionTwo}
-                  onChange={() => { this.setState({ rightAnswer: this.state.optionTwo }) }} />{' '}
-                <Label check>
-                  <Input type="textarea" name="optionTwo" placeholder="Option Two" style={{ width: "240%" }}
-                    onChange={(text) => this.setState({ optionTwo: text.target.value })} />
-                </Label>
+                  <Input type="radio" name="radio1" value={this.state.optionTwo}
+                    onChange={() => { this.setState({ rightAnswer: this.state.optionTwo }) }} />{' '}
+                  <Label check>
+                    <Input type="textarea" name="optionTwo" placeholder="Option Two" style={{ width: "240%" }}
+                      onChange={(text) => this.setState({ optionTwo: text.target.value })} />
+                  </Label>
+                </FormGroup>
+                <FormGroup check>
+                  <Input type="radio" name="radio1" value={this.state.optionThree}
+                    onChange={() => { this.setState({ rightAnswer: this.state.optionThree }) }} />{' '}
+                  <Label check>
+                    <Input type="textarea" name="optionThree" placeholder="Option Three" style={{ width: "240%" }}
+                      onChange={(text) => this.setState({ optionThree: text.target.value })} />
+                  </Label>
+                </FormGroup>
+                <FormGroup check>
+                  <Input type="radio" name="radio1" value={this.state.optionFour}
+                    onChange={() => { this.setState({ rightAnswer: this.state.optionFour }) }} />{' '}
+                  <Label check>
+                    <Input type="textarea" name="optionFour" placeholder="Option Four" style={{ width: "240%" }}
+                      onChange={(text) => this.setState({ optionFour: text.target.value })} />
+                  </Label>
+                </FormGroup>
               </FormGroup>
-              <FormGroup check>
-                <Input type="radio" name="radio1" value={this.state.optionThree}
-                  onChange={() => { this.setState({ rightAnswer: this.state.optionThree }) }} />{' '}
-                <Label check>
-                  <Input type="textarea" name="optionThree" placeholder="Option Three" style={{ width: "240%" }}
-                    onChange={(text) => this.setState({ optionThree: text.target.value })} />
-                </Label>
-              </FormGroup>
-              <FormGroup check>
-                <Input type="radio" name="radio1" value={this.state.optionFour}
-                  onChange={() => { this.setState({ rightAnswer: this.state.optionFour }) }} />{' '}
-                <Label check>
-                  <Input type="textarea" name="optionFour" placeholder="Option Four" style={{ width: "240%" }}
-                    onChange={(text) => this.setState({ optionFour: text.target.value })} />
-                </Label>
-              </FormGroup>
-            </FormGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={this.addQuestion}>Add New Question</Button>
-            <Button onClick={() => this.setState({ addPrompt: false })}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
-        {/* The display of the page without the prompt */}
-        <Form >
-          <legend> Create A Quiz </legend>
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={this.addQuestion}>Add New Question</Button>
+              <Button onClick={() => this.setState({ addPrompt: false })}>Cancel</Button>
+            </ModalFooter>
+          </Modal>
+          {/* The display of the page without the prompt */}
+          <Form >
+            <legend> Create A Quiz </legend>
 
-          <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
-          <br />
-          <br />
-          {/* <Button>Submit Quiz</Button> */}
-          <Button onClick={() => this.state.sumbitQuestion()}>Submit Quiz</Button>
-          <br />
-          <Row align='center' margin={100}>
-            {
-              // Display the list of questions that have been added to the list
-              this.state.questions.map((val, idx) => {
-                let questionID = `question-${idx}`
-                return (
-                  <Col align='center' margin={100}>
-                    <div key={idx}>
-                      {/** Label of the question */}
+            <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
+            <br />
+            <br />
+            {/* <Button>Submit Quiz</Button> */}
+            <Button onClick={() => this.state.sumbitQuestion()}>Submit Quiz</Button>
+            <br />
+            <Row align='center' margin={100}>
+              {
+                // Display the list of questions that have been added to the list
+                this.state.questions.map((val, idx) => {
+                  let questionID = `question-${idx}`
+                  return (
+                    <Col align='center' margin={100}>
+                      <div key={idx}>
+                        {/** Label of the question */}
 
-                      <label htmlFor={questionID} className="questions-List">
-                        <ListGroup className="question-Alignment">
-                          <ListGroupItem >
-                            {`${idx + 1}`}: {this.state.questions[idx].question}
-                          </ListGroupItem>
-                          <ListGroupItem>
-                            a: {this.state.questions[idx].optionOne}
-                          </ListGroupItem>
-                          <ListGroupItem>
-                            b: {this.state.questions[idx].optionTwo}
-                          </ListGroupItem>
-                          <ListGroupItem>
-                            c: {this.state.questions[idx].optionThree}
-                          </ListGroupItem>
-                          <ListGroupItem>
-                            d: {this.state.questions[idx].optionFour}
-                          </ListGroupItem>
-                          <ListGroupItem>
-                            Answer: {this.state.questions[idx].rightAnswer}
-                          </ListGroupItem>
-                          <Button onClick={() => { this.removeQuestion(idx);}}>Remove Question</Button>
-                        </ListGroup>
-                      </label>
-                    </div>
-                  </Col>
-                )
-              })
-            }
-          </Row>
-        </Form>
+                        <label htmlFor={questionID} className="questions-List">
+                          <ListGroup className="question-Alignment">
+                            <ListGroupItem >
+                              {`${idx + 1}`}: {this.state.questions[idx].question}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              a: {this.state.questions[idx].optionOne}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              b: {this.state.questions[idx].optionTwo}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              c: {this.state.questions[idx].optionThree}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              d: {this.state.questions[idx].optionFour}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              Answer: {this.state.questions[idx].rightAnswer}
+                            </ListGroupItem>
+                            <Button onClick={() => { this.removeQuestion(idx);}}>Remove Question</Button>
+                          </ListGroup>
+                        </label>
+                      </div>
+                    </Col>
+                  )
+                })
+              }
+            </Row>
+          </Form>
+        </div>
       </div>
     );
   }

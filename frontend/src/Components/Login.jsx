@@ -17,6 +17,7 @@ class Login extends React.Component {
         super(props);
         // this.toggleIsLoggedIn = this.props.toggleIsLoggedIn();
         this.state = {
+            user: "",
             email: "",
             password: "",
             errors: {}
@@ -30,7 +31,7 @@ class Login extends React.Component {
         firebase.auth().onAuthStateChanged((user) => {
             console.log(user)
             if (user) {
-                this.setState({ user })
+                this.setState({ user:user })
                 localStorage.setItem('user', user.uid)
             } else {
                 this.setState({ user: null })

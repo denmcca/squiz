@@ -36,7 +36,6 @@ class PageNavigation extends Component {
     let loginRoute;
     let loginMoreRoutes;
     loginText = this.props.isLoggedIn ? "Logout" : "Login";
-    loginRoute = this.props.isLoggedIn ? "/login" : "/login";
     console.log("loginRoute: " + loginRoute);
     loginMoreRoutes = this.props.isLoggedIn ? displayMoreRoutes() : null;
     
@@ -52,8 +51,8 @@ class PageNavigation extends Component {
             <Nav className="ml-auto" navbar>
               {this.props.isLoggedIn ? displayMoreRoutes(this.props.isDropDownOpen) : null}
               <NavItem className='navlink-format' className='navlink-format'>
-                <NavLink className="font2" to={loginRoute} 
-                            onClick={this.props.isLoggedIn ? this.logOut.bind(this) : this.props.logUserIn}
+                <NavLink className="font2" to={'/login'} 
+                            onClick={this.props.isLoggedIn ? this.logOut.bind(this) : null}
                             activeStyle={navLinkStyles.activeStyle}
                             style={navLinkStyles.defaultStyle}>
                   {loginText}

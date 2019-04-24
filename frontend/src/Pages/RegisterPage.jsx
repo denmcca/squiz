@@ -1,8 +1,16 @@
 import React, { Component } from "react";
+import {
+  Form,
+  Col,
+  FormGroup,
+  Input,
+  Alert,
+} from 'reactstrap';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { registerUser } from "../actions/authentication";
+import firebase from 'firebase'
 
 class Register extends Component {
   constructor() {
@@ -11,31 +19,66 @@ class Register extends Component {
       name: "",
       email: "",
       username: "",
-      password: "",
+      password1: "",
       password2: "",
-      errors: {}
+      errors: {},
+      loginMessage: null
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  componentDidMount = () => {
+    this.authListener();
   }
 
-  handleSubmit(e) {
+  authListener() {
+    firebase.auth().onAuthStateChanged((user) => {
+        console.log(user)
+        if (user) {
+            this.setState({ user:user })
+            localStorage.setItem('user', user.uid)
+        } else {
+            this.setState({ user: null })
+            localStorage.removeItem('user')
+        }
+    })
+  }
+
+  // handleInputChange = (e) => {
+  //   this.setState({
+  //     [e.target.name]: e.target.value
+  //   });
+  // }
+
+  handleSubmit = async(e) => {
+    console.log('handleSubmit called');
     e.preventDefault();
-    const user = {
-      name: this.state.name,
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password,
-      password2: this.state.password2
-    };
-    this.props.registerUser(user, this.props.history);
+    // const user = {
+    //   name: this.state.name,
+    //   email: this.state.email,
+    //   username: this.state.username,
+    //   password1: this.state.password1,
+    //   password2: this.state.password2
+    // };
+    // this.props.registerUser(user, this.props.history);
+    let goAhead = true;
+    await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password1)
+      .then((u) => {})
+      .catch((error) => {
+        alert(error)
+        goAhead = false;
+        // alert('login failed');
+        this.setState({loginMessage: "Registration failed!"});
+      });
+    if (goAhead)
+    {
+      let newUser = {name: this.state.name, email: this.state.email, };
+      this.props.setUser(newUser);
+      this.props.logUserIn();
+      alert('user logged in!');
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -52,59 +95,68 @@ class Register extends Component {
         <h2 style={{ marginBottom: "40px" }}>Registration</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <input
+            <Input
               type="text"
               placeholder="Name"
               className="form-control"
               name="name"
-              onChange={this.handleInputChange}
+              id="userName"
+              onChange={(text) => this.setState({ name: text.target.value })}
               value={this.state.name}
             />
           </div>
           <div className="form-group">
-            <input
+            <Input
               type="email"
               placeholder="Email"
               className="form-control"
               name="email"
-              onChange={this.handleInputChange}
+              id="userEmail"
+              onChange={(text) => this.setState({ email: text.target.value })}
               value={this.state.email}
             />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <input
               type="text"
               placeholder="Username"
               className="form-control"
               name="username"
-              onChange={this.handleInputChange}
+              onChange={() => this.setState=({username: text.target.value})}
               value={this.state.username}
             />
-          </div>
+          </div> */}
           <div className="form-group">
-            <input
+            <Input
               type="password"
               placeholder="Password"
               className="form-control"
-              name="password"
-              onChange={this.handleInputChange}
-              value={this.state.password}
+              name="password1"
+              id="userPassword"
+              onChange={(text) => this.setState({ password1: text.target.value })}
+              value={this.state.password1}
             />
           </div>
           <div className="form-group">
-            <input
+            <Input
               type="password"
               placeholder="Confirm Password"
               className="form-control"
               name="password2"
-              onChange={this.handleInputChange}
+              id="userPassword2"
+              onChange={(text) => this.setState({ password2: text.target.value })}
               value={this.state.password2}
             />
           </div>
           <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" onClick={() => this.handleSubmit.bind(this)}>
               Register User
             </button>
+            {this.state.loginMessage ? 
+              <Alert color='danger'>
+                {this.state.loginMessage}
+              </Alert>
+              : null}
           </div>
         </form>
       </div>
@@ -120,7 +172,9 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { registerUser }
-)(withRouter(Register));
+const mapDispatchToProps = dispatch => ({
+  logUserIn: () => dispatch({type:"LOGIN"}),
+  setUser: (user) => dispatch({type:'SET_USER', value:user})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

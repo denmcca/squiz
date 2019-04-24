@@ -39,8 +39,8 @@ class Router extends React.Component {
 
           {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
         </div>
-        </div>
-      </BrowserRouter>
+      </div>
+    </BrowserRouter>
     )
     
     // else {
