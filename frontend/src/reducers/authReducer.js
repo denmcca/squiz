@@ -3,11 +3,7 @@ import isEmpty from '../is-empty';
 
 const initialState = {
     isAuthenticated: false,
-    user: {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'email@email.com',
-    }
+    user: {}
 }
 
 const authReducer = (state = initialState, action) => {
@@ -15,8 +11,8 @@ const authReducer = (state = initialState, action) => {
         case SET_CURRENT_USER:
             return{
                 ...state,
-                isAuthenticated: !isEmpty(action.value),
-                user: action.value
+                isAuthenticated: !isEmpty(action.payload),
+                user: action.payload
             }
         default:
             return state;
