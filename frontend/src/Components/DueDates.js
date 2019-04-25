@@ -93,52 +93,41 @@ export class DueDatesTable extends React.Component {
         }
     }
 
-    getStyles = () => {
-        const GREY = "#9E9E9E";
-    
-        return {
-            header: {
-                // styles go here!
-            },
-            well: {
-                boxShadow: `0px 0px 15px ${GREY}`,
-            },
-        };
-    };
-
     render() 
     {
-        const styles = this.getStyles();
-
         return(
-            <div style = {styles.well}>
-                <div style = {styles.header}>
-                    <row>
-                        <p>Upcoming Due Dates</p>
-                        <Table striped bordered hover /*responsive size="lg" */>
-                            <thead>
-                                <tr>
-                                    <th width="25%">TITLE</th>
-                                    <th width="25%">PROFESSOR</th>
-                                    <th width="25%">DATE</th>
-                                    <th width="25%">COURSE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.assignments.map((val, idx) => {
-                                    return(
-                                        <tr>
-                                            <th scope="row">{this.state.assignments[idx].title}</th>
-                                            <td>{this.state.assignments[idx].prof}</td>
-                                            <td>{this.state.assignments[idx].date}</td>
-                                            <td>{this.state.assignments[idx].course}</td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>                
-                        </Table>
-                    </row>
-                </div>
+            <div className = 'shadow'>
+                <ListGroup>
+                    <ListGroupItem>
+                        <row>
+                            <font size="4">
+                                <b>Upcoming Due Dates</b>
+                            </font>
+                            <Table striped bordered hover /*responsive size="lg" */>
+                                <thead>
+                                    <tr>
+                                        <th width="25%">TITLE</th>
+                                        <th width="25%">PROFESSOR</th>
+                                        <th width="25%">DATE</th>
+                                        <th width="25%">COURSE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.assignments.map((val, idx) => {
+                                        return(
+                                            <tr>
+                                                <th scope="row">{this.state.assignments[idx].title}</th>
+                                                <td>{this.state.assignments[idx].prof}</td>
+                                                <td>{this.state.assignments[idx].date}</td>
+                                                <td>{this.state.assignments[idx].course}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>                
+                            </Table>
+                        </row>
+                    </ListGroupItem>
+                </ListGroup>
             </div>
         )
     }
