@@ -14,13 +14,18 @@ export default class RecentGrades extends Component {
     componentDidMount() {
         this.fetchData();
     }
-    // fetch from database instead of hardcoding later
+    // fetch from database
     fetchData = async () => {
+        // the database stores the grade under /account/user ID/grades
         var dbRef = db.ref("/account/" + localStorage.getItem('user') + "/grades/")
         var gradesFromDB = []
         await dbRef.once("value", grade => {
+            // each grade is listed based on the course
             grade.forEach(course => {
+                // each course have several quizzes in it
                 course.forEach(quiz => {
+                    // for each of the quizzes in each course in the grades database
+                    // push it into the list to update the view
                     gradesFromDB.push({
                         courseName: course.key,
                         quizName: quiz.key,
