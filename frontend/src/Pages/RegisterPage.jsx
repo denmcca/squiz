@@ -16,7 +16,8 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       username: "",
       password1: "",
@@ -74,7 +75,7 @@ class Register extends Component {
       });
     if (goAhead)
     {
-      let newUser = {name: this.state.name, email: this.state.email, };
+      let newUser = {firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, };
       this.props.setUser(newUser);
       this.props.logUserIn();
       alert('user logged in!');
@@ -97,12 +98,23 @@ class Register extends Component {
           <div className="form-group">
             <Input
               type="text"
-              placeholder="Name"
+              placeholder="First Name"
               className="form-control"
-              name="name"
+              // name="name"
               id="userName"
-              onChange={(text) => this.setState({ name: text.target.value })}
-              value={this.state.name}
+              onChange={(text) => this.setState({ firstName: text.target.value })}
+              value={this.state.firstName}
+            />
+          </div>
+          <div className="form-group">
+            <Input
+              type="text"
+              placeholder="Last Name"
+              className="form-control"
+              // name="name"
+              id="userName"
+              onChange={(text) => this.setState({ lastName: text.target.value })}
+              value={this.state.lastName}
             />
           </div>
           <div className="form-group">
@@ -110,7 +122,7 @@ class Register extends Component {
               type="email"
               placeholder="Email"
               className="form-control"
-              name="email"
+              // name="email"
               id="userEmail"
               onChange={(text) => this.setState({ email: text.target.value })}
               value={this.state.email}
@@ -131,7 +143,7 @@ class Register extends Component {
               type="password"
               placeholder="Password"
               className="form-control"
-              name="password1"
+              // name="password1"
               id="userPassword"
               onChange={(text) => this.setState({ password1: text.target.value })}
               value={this.state.password1}

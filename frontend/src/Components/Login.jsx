@@ -48,6 +48,9 @@ class Login extends React.Component {
         // store this in redux store
         alert("Logged in as: " + localStorage.getItem('user'))
         if(localStorage.getItem('user') !== null){
+            userInfo = localStorage.getItem('user');
+            newUser = user {firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email};
+            this.setUser();
             this.props.logUserIn()
         }
     }
@@ -83,13 +86,14 @@ class Login extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.rLogin.isLoggedIn,
-        email: state.rUser.email,
-        password: state.rUser.password // placeholder
+        email: state.rUser.user.email,
+        password: state.rUser.user.password // placeholder
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         logUserIn: () => dispatch({ type: 'LOGIN' }),
+        setUser: (user) => dispatch({type: 'SET_USER', value:user}),
         updateEmail: () => dispatch({ type: 'UPDATE_EMAIL' }),
         updatePassword: () => dispatch({ type: 'UPDATE_PASSWORD' })
     }

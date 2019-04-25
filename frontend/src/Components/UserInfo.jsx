@@ -7,8 +7,12 @@ import {
     IoIosPerson
 } from 'react-icons/io';
 import { connect } from 'react-redux'; 
+import {db} from '../firebase';
 
 class UserInfo extends Component {
+    componentDidMount() {
+        var dbRef = db.ref("account/" + localStorage.getItem('user') + '/userInfo');
+    }
     // constructor() {
     //     super();
     //     // the state stores the list of questions 
@@ -17,11 +21,12 @@ class UserInfo extends Component {
     //     }
     // }
     render() {
+        console.log(this.props.user.firstName);
         return (
             <ListGroup>
                 <ListGroupItem>
                     <IoIosPerson />
-                        {this.props.firstName} {this.props.lastName}
+                        {this.props.user.firstName} {this.props.user.lastName}
                 </ListGroupItem>
             </ListGroup>
         );
@@ -30,9 +35,9 @@ class UserInfo extends Component {
 
 const mapStateToProps = (state) => {
     return ({
-        firstName:state.rUser.firstName,
-        lastName:state.rUser.lastName,
-        email:state.rUser.email,
+        firstName:state.rUser.user.firstName,
+        lastName:state.rUser.user.lastName,
+        email:state.rUser.user.email,
     });
 };
 
