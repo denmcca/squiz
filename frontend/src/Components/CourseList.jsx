@@ -9,6 +9,7 @@ import {
     IoIosArrowDown,
     IoIosArrowForward
 } from 'react-icons/io';
+import {db} from '../firebase'
 export default class CourseList extends Component {
     constructor() {
         super();
@@ -22,7 +23,21 @@ export default class CourseList extends Component {
         this.fetchData()
     }
     fetchData = async () => {
-        this.setState({courses: [{ courseName: "CECS 445" }, { courseName: "CECS 491A" }, { courseName: "CECS 475" }, { courseName: "CECS 428" }]})
+        // the database stores the grade under /account/user ID/grades
+        var dbRef = db.ref("/account/" + localStorage.getItem('user') + "/classes/")
+        var coursesFromDB = []
+        await dbRef.once("value", classes => {
+            // the list of classes is returned by dbRef.once
+            classes.forEach(courseKey => {
+                // each course has a key of 0, 1, 2, etc.
+                courseKey.forEach(course => {
+                    coursesFromDB.push({
+                        courseName: course.val()
+                    })
+                })
+            })
+        })
+        this.setState({ courses: coursesFromDB })
     }
     displayCourse() {
         this.setState({ courseCollapse: !this.state.courseCollapse });
