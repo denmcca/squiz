@@ -18,7 +18,6 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import {db} from '../firebase'
-import firebase from 'firebase'
 class CreateQuizPage extends Component {
   constructor() {
     super();
@@ -62,6 +61,7 @@ class CreateQuizPage extends Component {
           rightAnswer: question.rightAnswer
         })
       })
+      alert("Quiz have been submitted as "+ this.state.quizName)
     }
   }
   // adding a question to the list
