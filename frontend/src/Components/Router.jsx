@@ -36,25 +36,10 @@ class Router extends React.Component {
           <Route exact path="/" component={ this.props.isLoggedIn ? WelcomePage : LoginPage } />
           <Route path="/" component={ PageNotFound } />
           </Switch>
-
-
-          {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
         </div>
       </div>
     </BrowserRouter>
     )
-    
-    // else {
-    //   return (
-    //     <BrowserRouter basename={process.env.PUBLIC_URL}>
-    //       <div>
-    //         <Route component={WelcomePage} />
-    //         <Route exact path='/logout' component={LogoutPage} />
-    //         <Route exact path='/login' component={LoginPage} />
-    //       </div>
-    //     </BrowserRouter>
-    //   )
-    // }
   }
 }
 
