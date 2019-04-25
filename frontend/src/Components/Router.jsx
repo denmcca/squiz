@@ -9,6 +9,7 @@ import GradesPage from '../Pages/GradesPage';
 import LogoutPage from '../Pages/LogoutPage';
 import AboutPage from '../Pages/AboutPage'
 import PlaceHolderPage from '../Pages/PlaceHolderPage'
+import QuizTakingPage from '../Pages/QuizTakingPage'
 import { connect } from 'react-redux';
 import PageNavigation from './PageNavigation'
 import PageNotFound from '../Pages/404'
@@ -29,7 +30,7 @@ class Router extends React.Component {
           <Route exact path='/dash' component={ this.props.isLoggedIn ? HomePage : WelcomePage } />
           <Route exact path='/grades' component={ this.props.isLoggedIn ? GradesPage : WelcomePage } />
           <Route exact path='/login' component={ this.props.isLoggedIn ? WelcomePage : LoginPage } />
-          <Route exact path='/quizzes' component={ this.props.isLoggedIn ? PlaceHolderPage : WelcomePage } />
+          <Route exact path='/quizzes' component={ this.props.isLoggedIn ? QuizTakingPage : WelcomePage } />
           <Route exact path='/register' component ={ this.props.isLoggedIn ? WelcomePage : RegisterPage } />
           <Route exact path="/welcome" component={ this.props.isLoggedIn ? WelcomePage : LoginPage } />
           <Route exact path="/" component={ this.props.isLoggedIn ? WelcomePage : LoginPage } />
