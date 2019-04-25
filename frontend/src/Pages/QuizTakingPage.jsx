@@ -23,8 +23,17 @@ export default class QuizTakingPage extends Component {
         super();
         // the state stores the list of questions 
         this.state = {
-            quizList: [
-            ]
+            quizList: [],
+            // Reference on displaying questions 
+            // they are stored as a json after you click which quiz to take
+            // stored as an array of json as shown below[example shown below is a list of one]:
+            // [{
+            //  question: "Question here",
+            //  possibleAnswers: [possibleAnswer: "option One", possibleAnswer: "option Two", etc.],
+            //  rightAnswer: "Correct answer"
+            // }]
+            questions: [],
+
         }
     }
     componentDidMount() {
@@ -61,12 +70,12 @@ export default class QuizTakingPage extends Component {
                 var rightAnswer = ""
                 question.forEach(possibleAnswers => {
                     if (possibleAnswers.key !== 'rightAnswer' && possibleAnswers.val() !== "") {
-                        
+
                         // push the database data into the questionfromdb array
                         multiChoice.push({
                             possibleAnswer: possibleAnswers.val()
                         })
-                    }else{
+                    } else {
                         // store the right answer locally
                         rightAnswer = possibleAnswers.val()
                     }
@@ -80,7 +89,7 @@ export default class QuizTakingPage extends Component {
         })
         // print the questions from db array
         alert(JSON.stringify(questionsFromDB))
-        // this.setState({ quizList: quizListFromDB })
+        this.setState({ questions: questionsFromDB })
     }
     render() {
         return (
