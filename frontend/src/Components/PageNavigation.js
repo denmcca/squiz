@@ -35,19 +35,11 @@ class PageNavigation extends Component {
     let loginText;
     let loginRoute;
     let loginMoreRoutes;
-<<<<<<< HEAD
 
     loginText = this.state.isLoggedIn ? "Logout" : "Login";
     loginRoute = this.state.isLoggedIn ? "/Logout/" : "/Login";
     loginMoreRoutes = this.state.isLoggedIn ? displayMoreRoutes() : null;
 
-=======
-    loginText = this.props.isLoggedIn ? "Logout" : "Login";
-    loginRoute = this.props.isLoggedIn ? "/login" : "/login";
-    console.log("loginRoute: " + loginRoute);
-    loginMoreRoutes = this.props.isLoggedIn ? displayMoreRoutes() : null;
-    
->>>>>>> parent of 5dc08db... Registration now working. Login link in navbar now moves user to login page.
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -57,28 +49,10 @@ class PageNavigation extends Component {
           {/* <NavbarToggler onClick={this.toggle} />  not sure what this does*/}
           <Collapse className="font1" isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-<<<<<<< HEAD
               {loginMoreRoutes}
               {/* {displayMoreRoutes} */}
               <NavItem >
                 <NavLink className="font2" href={loginRoute}>{loginText}</NavLink>
-=======
-              {this.props.isLoggedIn ? displayMoreRoutes(this.props.isDropDownOpen) : null}
-              <NavItem className='navlink-format' className='navlink-format'>
-                <NavLink className="font2" to={loginRoute} 
-                            onClick={this.props.isLoggedIn ? this.logOut.bind(this) : this.props.logUserIn}
-                            activeStyle={navLinkStyles.activeStyle}
-                            style={navLinkStyles.defaultStyle}>
-                  {loginText}
-                </NavLink>
-              </NavItem>
-              <NavItem className='navlink-format'>
-                <NavLink className="font2" to={this.props.isLoggedIn ? '/' : '/register'} 
-                            activeStyle={navLinkStyles.activeStyle}
-                            style={navLinkStyles.defaultStyle}>
-                  {this.props.isLoggedIn ? '' : 'Register'}
-                </NavLink>
->>>>>>> parent of 5dc08db... Registration now working. Login link in navbar now moves user to login page.
               </NavItem>
             </Nav>
           </Collapse>

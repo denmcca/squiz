@@ -89,11 +89,7 @@ class CreateQuizPage extends Component {
   // the displayed page
   render() {
     return (
-<<<<<<< HEAD
       <div className="container">
-=======
-      <div className="app-size" align='center'>
->>>>>>> parent of 5dc08db... Registration now working. Login link in navbar now moves user to login page.
         {/* The Prompt for adding a question, its a modal or a 'pop-up' */}
         <Modal isOpen={this.state.addPrompt}>
           <ModalHeader>Add A Question</ModalHeader>
@@ -155,36 +151,21 @@ class CreateQuizPage extends Component {
           </ModalFooter>
         </Modal>
         {/* The display of the page without the prompt */}
-<<<<<<< HEAD
         <Form>
-=======
-        <Form >
->>>>>>> parent of 5dc08db... Registration now working. Login link in navbar now moves user to login page.
           <legend> Create A Quiz </legend>
 
           <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
           <br />
           <br />
-<<<<<<< HEAD
           <Button>Submit Quiz</Button>
           <br />
           <Row>
-=======
-          {/* <Button>Submit Quiz</Button> */}
-          <Button onClick={() => this.state.sumbitQuestion()}>Submit Quiz</Button>
-          <br />
-          <Row align='center' margin={100}>
->>>>>>> parent of 5dc08db... Registration now working. Login link in navbar now moves user to login page.
             {
               // Display the list of questions that have been added to the list
               this.state.questions.map((val, idx) => {
                 let questionID = `question-${idx}`
                 return (
-<<<<<<< HEAD
                   <Col xs={6}>
-=======
-                  <Col align='center' margin={100}>
->>>>>>> parent of 5dc08db... Registration now working. Login link in navbar now moves user to login page.
                     <div key={idx}>
                       {/** Label of the question */}
 
@@ -208,16 +189,10 @@ class CreateQuizPage extends Component {
                           <ListGroupItem>
                             Answer: {this.state.questions[idx].rightAnswer}
                           </ListGroupItem>
-<<<<<<< HEAD
                           <Button onClick={() => { this.removeQuestion(idx); }}>Remove Question</Button>
                         </ListGroup>
                       </label>
 
-=======
-                          <Button onClick={() => { this.removeQuestion(idx);}}>Remove Question</Button>
-                        </ListGroup>
-                      </label>
->>>>>>> parent of 5dc08db... Registration now working. Login link in navbar now moves user to login page.
                     </div>
                   </Col>
                 )
