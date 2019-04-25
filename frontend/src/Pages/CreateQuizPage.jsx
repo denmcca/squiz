@@ -17,7 +17,8 @@ import {
   ListGroupItem
 } from 'reactstrap';
 import { connect } from 'react-redux';
-
+import {db} from '../firebase'
+import firebase from 'firebase'
 class CreateQuizPage extends Component {
   constructor() {
     super();
@@ -41,10 +42,27 @@ class CreateQuizPage extends Component {
       optionFour: "",
       rightAnswer: "",
       addPrompt: false,
+      quizName: ""
     }
     // listeners
     // this.handleInputChange = this.handleInputChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  submitQuiz = async () => {
+    var dbRef = db.ref("account/" + localStorage.getItem('user') + "/quizzes/" + this.state.quizName + "/")
+    if (this.state.quizName === "") {
+      alert("Quiz Name can not be empty!")
+    } else {
+      this.state.questions.forEach(question => {
+        dbRef.child(question.question).set({
+          optionOne: question.optionOne,
+          optionTwo: question.optionTwo,
+          optionThree: question.optionThree,
+          optionFour: question.optionFour,
+          rightAnswer: question.rightAnswer
+        })
+      })
+    }
   }
   // adding a question to the list
   addQuestion = (e) => {
@@ -88,9 +106,6 @@ class CreateQuizPage extends Component {
   // toggles the modal for adding the question
   toggleAddPrompt() {
     this.setState({ addPrompt: false });
-  }
-  sumbitQuestion() {
-    
   }
   // the displayed page
   render() {
@@ -160,12 +175,14 @@ class CreateQuizPage extends Component {
           {/* The display of the page without the prompt */}
           <Form >
             <legend> Create A Quiz </legend>
-
+            <text>Quiz Name</text>
+            <Input type="textarea" name="optionOne" placeholder="Quiz Name" style={{ width: "50%", height: "50%" }}
+              onChange={(text) => this.setState({ quizName: text.target.value })} />
             <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
             <br />
             <br />
             {/* <Button>Submit Quiz</Button> */}
-            <Button onClick={() => this.state.sumbitQuestion()}>Submit Quiz</Button>
+            <Button onClick={() => this.submitQuiz()}>Submit Quiz</Button>
             <br />
             <Row align='center' margin={100}>
               {
@@ -197,7 +214,7 @@ class CreateQuizPage extends Component {
                             <ListGroupItem>
                               Answer: {this.state.questions[idx].rightAnswer}
                             </ListGroupItem>
-                            <Button onClick={() => { this.removeQuestion(idx);}}>Remove Question</Button>
+                            <Button onClick={() => { this.removeQuestion(idx); }}>Remove Question</Button>
                           </ListGroup>
                         </label>
                       </div>
@@ -215,7 +232,7 @@ class CreateQuizPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn:state.rLogin.isLoggedIn,
+    isLoggedIn: state.rLogin.isLoggedIn,
     // questions:state.rQuiz.questions,
     // question:state.rQuiz.question,
     // optionOne:state.rQuiz.optionOne,
@@ -229,8 +246,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sumbitQuestion: () => dispatch({type: 'SUBMIT_QUESTION'}),
-    removeQuestion: () => dispatch({type: 'REMOVE_QUESTION'})
+    sumbitQuestion: () => dispatch({ type: 'SUBMIT_QUESTION' }),
+    removeQuestion: () => dispatch({ type: 'REMOVE_QUESTION' })
   }
 };
 

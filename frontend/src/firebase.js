@@ -8,7 +8,5 @@ const config = {
     storageBucket: "squiz-1c0b4.appspot.com",
     messagingSenderId: "67028683741"
 };
-firebase.initializeApp(config);
-export const provider = new firebase.auth.GoogleAuthProvider();
-export const auth = firebase.auth();
-export default firebase;
+let app = firebase.initializeApp(config);
+export const db = app.database();
