@@ -6,7 +6,6 @@ import HomePage from '../Pages/HomePage';
 import CreateQuizPage from '../Pages/CreateQuizPage';
 import WelcomePage from '../Pages/Welcome';
 import GradesPage from '../Pages/GradesPage';
-import QuizzesPage from '../Pages/QuizzesPage';
 
 
 export default class Router extends Component {
@@ -40,7 +39,6 @@ export default class Router extends Component {
             <Route exact path='/CreateQuiz' component={CreateQuizPage} />
             <Route exact path='/register' component ={RegisterPage} />
             <Route exact path='/grades' component={GradesPage} />
-            <Route exact path='/quizzes' component={QuizzesPage} />
           </div>
         </BrowserRouter>
       )
