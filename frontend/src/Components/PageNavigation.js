@@ -3,56 +3,67 @@ import "../App.css";
 import {
   Collapse,
   Navbar,
-  NavbarToggler,
+  // NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
+  NavDropdown,
+  NavbarToggler,
+  // Link,
+  // NavLink,
   DropdownItem } from 'reactstrap';
 import SquizLogo from '../squiz logo.png';
-
+import { connect } from 'react-redux';
+import {Link, NavLink} from 'react-router-dom';
+import firebase from 'firebase'
 class PageNavigation extends Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false,
-      isLoggedIn: this.props.isLoggedIn,
-    };
+  shouldComponentUpdate = (state, props) => {
+    console.log("Should component be updated: "/*+ state.isDropDownOpen + ' ' + this.props.isDropDownOpen*/);
+    return true;
   }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  logOut(){
+      firebase.auth().signOut();
+      alert("Logged off")
+      this.props.logUserOut();
   }
-
   render() {
-  
+    // let isDropDownOpen = false;
+    console.log("PageNavigation: " + this.props.isLoggedIn);
     let loginText;
     let loginRoute;
     let loginMoreRoutes;
-
-    loginText = this.state.isLoggedIn ? "Logout" : "Login";
-    loginRoute = this.state.isLoggedIn ? "/Logout/" : "/Login";
-    loginMoreRoutes = this.state.isLoggedIn ? displayMoreRoutes() : null;
-
+    loginText = this.props.isLoggedIn ? "Logout" : "Login";
+    console.log("loginRoute: " + loginRoute);
+    loginMoreRoutes = this.props.isLoggedIn ? displayMoreRoutes() : null;
+    
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">
-          <img src={SquizLogo} alt="Squiz" width="100"/>
-          </NavbarBrand>
-          {/* <NavbarToggler onClick={this.toggle} />  not sure what this does*/}
-          <Collapse className="font1" isOpen={this.state.isOpen} navbar>
+          <NavLink to='/about'>
+            <NavbarBrand>
+                <img src={SquizLogo} alt="Squiz" width="100"/>
+            </NavbarBrand>
+          </NavLink>
+          <Collapse className="font1" isOpen={this.props.isDropDownOpen} navbar>
             <Nav className="ml-auto" navbar>
-              {loginMoreRoutes}
-              {/* {displayMoreRoutes} */}
-              <NavItem >
-                <NavLink className="font2" href={loginRoute}>{loginText}</NavLink>
+              {this.props.isLoggedIn ? displayMoreRoutes(this.props.isDropDownOpen) : null}
+              <NavItem className='navlink-format' className='navlink-format'>
+                <NavLink className="font2" to={'/login'} 
+                            onClick={this.props.isLoggedIn ? this.logOut.bind(this) : null}
+                            activeStyle={navLinkStyles.activeStyle}
+                            style={navLinkStyles.defaultStyle}>
+                  {loginText}
+                </NavLink>
+              </NavItem>
+              <NavItem className='navlink-format'>
+                <NavLink className="font2" to={this.props.isLoggedIn ? '/' : '/register'} 
+                            activeStyle={navLinkStyles.activeStyle}
+                            style={navLinkStyles.defaultStyle}>
+                  {this.props.isLoggedIn ? '' : 'Register'}
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
@@ -62,41 +73,96 @@ class PageNavigation extends Component {
   }
 }
 
-function displayMoreRoutes(){
+const navLinkStyles = {
+  defaultStyle: {fontWeight: "bold",
+  color: "black"},
+  activeStyle: {fontWeight: "bold",
+  color: "orange"},
+  dropdownStyle: {fontWeight: "bold",
+  color: "gray",
+  verticalAlign: "top"},
+}
+
+function displayMoreRoutes(isDropDownOpen){
+  // let activeStyle = {
+  //   fontWeight: "bold",
+  //   color: "red"
+  // };
+  // let defaultStyle = {
+  //   fontWeight: "bold",
+  //   color: "orange"
+  // }
   return (
     <Nav>
-      <NavItem>
-        <NavLink href="/">Dash</NavLink>
+      <NavItem className='navlink-format'>
+        <NavLink to="/dash" 
+          activeStyle={navLinkStyles.activeStyle}
+          style={navLinkStyles.defaultStyle}>Dash</NavLink>
       </NavItem>
-      <NavItem>
-        <NavLink href="/Quizzes/">Quizzes</NavLink>
+      <NavItem className='navlink-format'>    
+        <NavLink to="/quizzes/"
+          activeStyle={navLinkStyles.activeStyle}
+          style={navLinkStyles.defaultStyle}>Quizzes</NavLink>
+        </NavItem>
+      <NavItem className='navlink-format'>  
+        <NavLink to="/createquiz/"
+          activeStyle={navLinkStyles.activeStyle}
+          style={navLinkStyles.defaultStyle}>Create Quiz</NavLink>
       </NavItem>
-      <NavItem>
-        <NavLink href="/CreateQuiz/">Create Quiz</NavLink>
+      <NavItem className='navlink-format'>
+        <NavLink to="/grades/"
+            activeStyle={navLinkStyles.activeStyle}
+            style={navLinkStyles.defaultStyle}>My Grades</NavLink>
       </NavItem>
-      <NavItem>
-        <NavLink href="/grades/">My Grades</NavLink>
+      <NavItem className='navlink-format'>
+        <NavLink to="/settings/"
+            activeStyle={navLinkStyles.activeStyle}
+            style={navLinkStyles.defaultStyle}>Settings</NavLink>
       </NavItem>
-      <NavItem>
-        <NavLink href="/Settings/">Settings</NavLink>
-      </NavItem>
+        <Collapse className="font1" isOpen={isDropDownOpen} navbar>
+
       <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav caret>
+        <DropdownToggle nav caret style={navLinkStyles.dropdownStyle} className='navlink-format'>
           Classes
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem>
-            Class 1
+            <NavLink to='/class1/'
+              activeStyle={navLinkStyles.activeStyle}
+              style={navLinkStyles.defaultStyle}>
+              Class 1
+            </NavLink>
           </DropdownItem>
           <DropdownItem divider />
           <DropdownItem>
-            Class 2
+            <NavLink to='/class2/'
+              activeStyle={navLinkStyles.activeStyle}
+              style={navLinkStyles.defaultStyle}>
+              Class 2
+            </NavLink>
+            
           </DropdownItem>
           <DropdownItem divider />
         </DropdownMenu>
       </UncontrolledDropdown>
+      </Collapse>
     </Nav>
   );
 }
 
-export default PageNavigation;
+const mapStateToProps = (state) => {
+  return {
+    isDropDownOpen: state.rNav.isDropDownOpen,
+    isLoggedIn: state.rLogin.isLoggedIn
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openDropDown: () => dispatch({type: 'OPEN_DROPDOWN'}),
+    logUserOut: () => dispatch({type: 'LOGOUT'}),
+    logUserIn: () => dispatch({type: "LOGIN"})
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(PageNavigation);

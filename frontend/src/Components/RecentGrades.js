@@ -71,32 +71,34 @@ export default class RecentGrades extends Component {
     }
     render() {
         return (
-            <ListGroup>
-                <ListGroupItem>
-                    <font size="4">
-                        <b>Recent Grades</b>
-                    </font>
-                    <div style = {{height: 400, overflow: "auto"}}>
-                        {
-                            // Display the list of questions that have been added to the list
-                            this.state.grades.map((val, idx) => {
-                                return (
-                                    <ListGroupItem>
-                                        <font size="3">
-                                            <b>{this.state.grades[idx].courseName}</b>
-                                            <br />
-                                        </font>
-                                        <font size="2">
-                                            {this.state.grades[idx].quizName}<br />
-                                            {this.state.grades[idx].grade}<br />
-                                        </font>
-                                    </ListGroupItem>
-                                )
-                            })
-                        }
-                    </div>
-                </ListGroupItem>
-            </ListGroup>
+            <div className='shadow'>
+                <ListGroup>
+                    <ListGroupItem>
+                        <font size="4">
+                            <b>Recent Grades</b>
+                        </font>
+                        <div style = {{height: 400, overflow: "auto"}}>
+                            {
+                                // Display the list of questions that have been added to the list
+                                this.state.grades.map((val, idx) => {
+                                    return (
+                                        <ListGroupItem>
+                                            <font size="3">
+                                                <b>{this.state.grades[idx].courseName}</b>
+                                                <br />
+                                            </font>
+                                            <font size="2">
+                                                {this.state.grades[idx].quizName}<br />
+                                                {this.state.grades[idx].grade}<br />
+                                            </font>
+                                        </ListGroupItem>
+                                    )
+                                })
+                            }
+                        </div>
+                    </ListGroupItem>
+                </ListGroup>
+            </div>
         )
     }
 }
