@@ -7,40 +7,27 @@ import {
     IoIosPerson
 } from 'react-icons/io';
 import { connect } from 'react-redux'; 
-import {db} from '../firebase';
 
-class UserInfo extends Component {
-    constructor() {
-        this.state = {
-            firstName: '',
-            lastName: '',
-        }
-    }
-    
+class UserInfo extends Component {    
     componentDidMount() 
     {
-        var dbRef = db.ref("account/" + localStorage.getItem('user') + '/userInfo').once('value').then(function (snapshot) 
-        {
-            this.setState(() => ({firstName: snapshot.val() && snapshot.val().firstName || 'Anonymous',
-                            lastName: snapshot.val() && snapshot.val().lastName || 'Anonymous'
-            }));
-
-        };
-    }
-    // constructor() {
-    //     super();
-    //     // the state stores the list of questions 
-    //     this.state = {
-    //         user: "John Doe"
-    //     }
-    // }
+        // console.log("componentDidMount (UserInfo)");
+        // db.ref("account/" + localStorage.getItem('user') + '/userInfo')
+        //     .once('value')
+        //     .then((snapshot) =>
+        //     {
+        //         this.props.setFirstName((snapshot.val() && snapshot.val().firstName || 'Anonymous'))
+        //         this.props.setLastName((snapshot.val() && snapshot.val().lastName || 'Anonymous'))
+        //     })
+    };
     render() {
-        console.log(this.props.user.firstName);
+        console.log(this.props.firstName);
+        console.log(this.props.lastName);
         return (
             <ListGroup>
                 <ListGroupItem>
                     <IoIosPerson />
-                        {this.props.user.firstName} {this.props.user.lastName}
+                        {this.props.firstName} {this.props.lastName}
                 </ListGroupItem>
             </ListGroup>
         );
@@ -49,15 +36,17 @@ class UserInfo extends Component {
 
 const mapStateToProps = (state) => {
     return ({
-        firstName:state.rUser.user.firstName,
-        lastName:state.rUser.user.lastName,
-        email:state.rUser.user.email,
+        firstName:state.rUser.firstName,
+        lastName:state.rUser.lastName,
+        email:state.rUser.email,
     });
 };
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        updateUser: (user) => dispatch({type:'UPDATE_USER',value:user}),
+        setFirstName: (fname) => dispatch({type: 'SET_FNAME', value: fname}),
+        setLastName: (lname) => dispatch({type: 'SET_FNAME', value: lname}),
+        setEmail: (email) => dispatch({type: 'SET_EMAIL', value: email}),
     })
 }
 

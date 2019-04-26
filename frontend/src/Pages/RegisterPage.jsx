@@ -128,16 +128,6 @@ class Register extends Component {
               value={this.state.email}
             />
           </div>
-          {/* <div className="form-group">
-            <input
-              type="text"
-              placeholder="Username"
-              className="form-control"
-              name="username"
-              onChange={() => this.setState=({username: text.target.value})}
-              value={this.state.username}
-            />
-          </div> */}
           <div className="form-group">
             <Input
               type="password"

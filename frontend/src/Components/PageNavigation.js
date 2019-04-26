@@ -30,21 +30,16 @@ class PageNavigation extends Component {
       this.props.logUserOut();
   }
   render() {
-    // let isDropDownOpen = false;
     console.log("PageNavigation: " + this.props.isLoggedIn);
     let loginText;
-    let loginRoute;
-    let loginMoreRoutes;
     loginText = this.props.isLoggedIn ? "Logout" : "Login";
-    console.log("loginRoute: " + loginRoute);
-    loginMoreRoutes = this.props.isLoggedIn ? displayMoreRoutes() : null;
     
     return (
       <div>
         <Navbar color="light" light expand="md">
           <NavLink to='/about'>
             <NavbarBrand>
-                <img src={SquizLogo} alt="Squiz" width="100"/>
+              <img src={SquizLogo} alt="Squiz" width="100"/>
             </NavbarBrand>
           </NavLink>
           <Collapse className="font1" isOpen={this.props.isDropDownOpen} navbar>
@@ -52,16 +47,16 @@ class PageNavigation extends Component {
               {this.props.isLoggedIn ? displayMoreRoutes(this.props.isDropDownOpen) : null}
               <NavItem className='navlink-format' className='navlink-format'>
                 <NavLink className="font2" to={'/login'} 
-                            onClick={this.props.isLoggedIn ? this.logOut.bind(this) : null}
-                            activeStyle={navLinkStyles.activeStyle}
-                            style={navLinkStyles.defaultStyle}>
+                    onClick={this.props.isLoggedIn ? this.logOut.bind(this) : null}
+                    activeStyle={navLinkStyles.activeStyle}
+                    style={navLinkStyles.defaultStyle}>
                   {loginText}
                 </NavLink>
               </NavItem>
               <NavItem className='navlink-format'>
                 <NavLink className="font2" to={this.props.isLoggedIn ? '/' : '/register'} 
-                            activeStyle={navLinkStyles.activeStyle}
-                            style={navLinkStyles.defaultStyle}>
+                    activeStyle={navLinkStyles.activeStyle}
+                    style={navLinkStyles.defaultStyle}>
                   {this.props.isLoggedIn ? '' : 'Register'}
                 </NavLink>
               </NavItem>
@@ -83,15 +78,8 @@ const navLinkStyles = {
   verticalAlign: "top"},
 }
 
-function displayMoreRoutes(isDropDownOpen){
-  // let activeStyle = {
-  //   fontWeight: "bold",
-  //   color: "red"
-  // };
-  // let defaultStyle = {
-  //   fontWeight: "bold",
-  //   color: "orange"
-  // }
+function displayMoreRoutes(isDropDownOpen)
+{
   return (
     <Nav>
       <NavItem className='navlink-format'>

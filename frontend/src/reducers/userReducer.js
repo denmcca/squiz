@@ -1,23 +1,20 @@
-import { UPDATE_EMAIL, UPDATE_PASSWORD, SET_USER, UNSET_USER }  from "../actions/types";
+import { SET_EMAIL, SET_PASSWORD, SET_FNAME, SET_LNAME, SET_USER }  from "../actions/types";
 
 const initialState = {
-    user: {
-        firstName: 'Test',
-        lastName: 'User', 
-        email: '',
-        // password: ''
-    } 
+    firstName: 'Test',
+    lastName: 'User', 
+    email: '',
+    password: ''
 };
 
 const userReducer = (state = initialState, action) => {
-    // const newState = {...state};
     switch(action.type) {
-        case UPDATE_EMAIL:
+        case SET_EMAIL:
             return {
                 ...state,
-                email: action.value.email,
+                email: action.email,
             }
-        case UPDATE_PASSWORD:
+        case SET_PASSWORD:
             return {
                 ...state,
                 password: action.value,
@@ -25,12 +22,19 @@ const userReducer = (state = initialState, action) => {
         case SET_USER:
             return {
                 ...state,
-                user: action.value,
+                firstName: action.value.firstName,
+                lastName: action.value.lastName,
+                email: action.value.email,
             }
-        case UNSET_USER:
+        case SET_FNAME:
             return {
                 ...state,
-                user: null,
+                firstName: action.value,
+            }
+        case SET_LNAME:
+            return {
+                ...state,
+                lastName: action.value,
             }
         default:
             return state;
