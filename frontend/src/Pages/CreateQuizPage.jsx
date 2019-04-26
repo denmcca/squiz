@@ -18,6 +18,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import {db} from '../firebase'
+import firebase from 'firebase'
 class CreateQuizPage extends Component {
   constructor() {
     super();
@@ -48,12 +49,12 @@ class CreateQuizPage extends Component {
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
   submitQuiz = async () => {
-    var dbRef = db.ref("/account/" + localStorage.getItem('user') + "/quizzes/" + this.state.quizName + "/")
+    var dbRef = db.ref("account/" + localStorage.getItem('user') + "/quizzes/" + this.state.quizName + "/")
     if (this.state.quizName === "") {
       alert("Quiz Name can not be empty!")
     } else {
       this.state.questions.forEach(question => {
-        dbRef.child(question.question).push({
+        dbRef.child(question.question).set({
           optionOne: question.optionOne,
           optionTwo: question.optionTwo,
           optionThree: question.optionThree,
@@ -61,7 +62,6 @@ class CreateQuizPage extends Component {
           rightAnswer: question.rightAnswer
         })
       })
-      alert("Quiz have been submitted as "+ this.state.quizName)
     }
   }
   // adding a question to the list

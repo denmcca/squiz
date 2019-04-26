@@ -8,15 +8,21 @@ import {
 } from 'react-icons/io';
 import { connect } from 'react-redux'; 
 
-class UserInfo extends Component {
-    // constructor() {
-    //     super();
-    //     // the state stores the list of questions 
-    //     this.state = {
-    //         user: "John Doe"
-    //     }
-    // }
+class UserInfo extends Component {    
+    componentDidMount() 
+    {
+        // console.log("componentDidMount (UserInfo)");
+        // db.ref("account/" + localStorage.getItem('user') + '/userInfo')
+        //     .once('value')
+        //     .then((snapshot) =>
+        //     {
+        //         this.props.setFirstName((snapshot.val() && snapshot.val().firstName || 'Anonymous'))
+        //         this.props.setLastName((snapshot.val() && snapshot.val().lastName || 'Anonymous'))
+        //     })
+    };
     render() {
+        console.log(this.props.firstName);
+        console.log(this.props.lastName);
         return (
             <ListGroup>
                 <ListGroupItem>
@@ -38,7 +44,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        updateUser: (user) => dispatch({type:'UPDATE_USER',value:user}),
+        setFirstName: (fname) => dispatch({type: 'SET_FNAME', value: fname}),
+        setLastName: (lname) => dispatch({type: 'SET_FNAME', value: lname}),
+        setEmail: (email) => dispatch({type: 'SET_EMAIL', value: email}),
     })
 }
 

@@ -6,18 +6,17 @@ import {
     FormGroup,
     Input,
 } from 'reactstrap';
-import { Route, Redirect } from 'react-router-dom';
 import firebase from 'firebase'
 // import SquizLogo from '../squiz logo.png';
 import { connect } from 'react-redux';
-import { throws } from "assert";
+import { db } from '../firebase';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        // this.toggleIsLoggedIn = this.props.toggleIsLoggedIn();
         this.state = {
-            user: "",
+            firstName: "",
+            lastName: "",
             email: "",
             password: "",
             errors: {}
@@ -40,14 +39,21 @@ class Login extends React.Component {
         })
     }
     login= async(e) =>  {
+        console.log("login called: ");
         e.preventDefault();
         await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
         }).catch((error) => {
             alert(error)
         });
         // store this in redux store
-        alert("Logged in as: " + localStorage.getItem('user'))
         if(localStorage.getItem('user') !== null){
+            db.ref("account/" + localStorage.getItem('user') + '/userInfo')
+            .once('value')
+            .then((snapshot) =>
+            {
+                this.props.setFirstName((snapshot.val() && snapshot.val().firstName || 'Anonymous'))
+                this.props.setLastName((snapshot.val() && snapshot.val().lastName || 'Anonymous'))
+            })
             this.props.logUserIn()
         }
     }
@@ -78,8 +84,6 @@ class Login extends React.Component {
     }
 }
 
-
-
 const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.rLogin.isLoggedIn,
@@ -90,8 +94,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         logUserIn: () => dispatch({ type: 'LOGIN' }),
-        updateEmail: () => dispatch({ type: 'UPDATE_EMAIL' }),
-        updatePassword: () => dispatch({ type: 'UPDATE_PASSWORD' })
+        // setUser: (user) => dispatch({type: 'SET_USER', value:user}),
+        setFirstName: (fname) => dispatch({type: 'SET_FNAME', value:fname}),
+        setLastName: (lname) => dispatch({type: 'SET_LNAME', value:lname}),
+        updateEmail: (email) => dispatch({ type: 'UPDATE_EMAIL', value:email }),
+        updatePassword: (password) => dispatch({ type: 'UPDATE_PASSWORD', value:password })
     }
 };
 
