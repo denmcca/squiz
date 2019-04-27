@@ -10,16 +10,16 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { registerUser } from "../actions/authentication";
-import firebase from 'firebase'
+import { db, writeUserData } from '../firebase';
+import firebase from 'firebase';
 
 class Register extends Component {
   constructor() {
     super();
-    this.state = {
+    this.state = { 
       firstName: "",
       lastName: "",
       email: "",
-      username: "",
       password1: "",
       password2: "",
       errors: {},
@@ -32,19 +32,6 @@ class Register extends Component {
 
   componentDidMount = () => {
     this.authListener();
-  }
-
-  authListener() {
-    firebase.auth().onAuthStateChanged((user) => {
-        console.log(user)
-        if (user) {
-            this.setState({ user:user })
-            localStorage.setItem('user', user.uid)
-        } else {
-            this.setState({ user: null })
-            localStorage.removeItem('user')
-        }
-    })
   }
 
   // handleInputChange = (e) => {
@@ -75,8 +62,12 @@ class Register extends Component {
       });
     if (goAhead)
     {
-      let newUser = {firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, };
-      this.props.setUser(newUser);
+      writeUserData(localStorage.getItem("user"), this.state.firstName, this.state.lastName, this.state.email);
+      // let newUser = {firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, };
+      this.props.setFirstName(this.state.firstName);
+      this.props.setLastName(this.state.lastName);
+      this.props.setEmail(this.state.email);
+      console.log(this.props.firstName, this.props.lastName, this.state.email);
       this.props.logUserIn();
       alert('user logged in!');
     }
@@ -89,6 +80,20 @@ class Register extends Component {
       });
     }
   }
+
+  authListener = () => {
+  firebase.auth().onAuthStateChanged((user) => {
+    var user = firebase.auth().currentUser;
+    console.log("user: ", user);
+    console.log("authListener (RegisterPage): ");
+    if (user) {
+        localStorage.setItem('user', user.uid)
+    } else {
+        this.setState({ user: null })
+        localStorage.removeItem('user')
+    }
+  })
+}
 
   render() {
     return (
@@ -115,7 +120,7 @@ class Register extends Component {
               id="userName"
               onChange={(text) => this.setState({ lastName: text.target.value })}
               value={this.state.lastName}
-            />
+              />
           </div>
           <div className="form-group">
             <Input
@@ -126,7 +131,7 @@ class Register extends Component {
               id="userEmail"
               onChange={(text) => this.setState({ email: text.target.value })}
               value={this.state.email}
-            />
+              />
           </div>
           <div className="form-group">
             <Input
@@ -137,7 +142,7 @@ class Register extends Component {
               id="userPassword"
               onChange={(text) => this.setState({ password1: text.target.value })}
               value={this.state.password1}
-            />
+              />
           </div>
           <div className="form-group">
             <Input
@@ -148,7 +153,7 @@ class Register extends Component {
               id="userPassword2"
               onChange={(text) => this.setState({ password2: text.target.value })}
               value={this.state.password2}
-            />
+              />
           </div>
           <div className="form-group">
             <button type="submit" className="btn btn-primary" onClick={() => this.handleSubmit.bind(this)}>
@@ -176,7 +181,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   logUserIn: () => dispatch({type:"LOGIN"}),
-  setUser: (user) => dispatch({type:'SET_USER', value:user})
+  // setUser: (user) => dispatch({type:'SET_USER', value:user})
+  setFirstName: (firstName) => dispatch({type:'SET_FNAME', value:firstName}),
+  setLastName: (lastName) => dispatch({type:'SET_LNAME', value:lastName}),
+  setEmail: (email) => dispatch({type: 'SET_EMAIL', value:email})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -10,3 +10,11 @@ const config = {
 };
 let app = firebase.initializeApp(config);
 export const db = app.database();
+
+export function writeUserData(userId, _firstName, _lastName, _email) {
+    firebase.database().ref('account/' + userId + '/userInfo').set({
+        firstName: _firstName,
+        lastName: _lastName,
+        email: _email,
+    });
+}

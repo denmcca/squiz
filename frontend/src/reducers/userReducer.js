@@ -12,7 +12,7 @@ const userReducer = (state = initialState, action) => {
         case SET_EMAIL:
             return {
                 ...state,
-                email: action.email,
+                email: action.value,
             }
         case SET_PASSWORD:
             return {

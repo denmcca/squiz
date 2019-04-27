@@ -42,7 +42,10 @@ class CreateQuizPage extends Component {
       optionFour: "",
       rightAnswer: "",
       addPrompt: false,
-      quizName: ""
+      quizName: "",
+      dueDate: null,
+      admin: "",
+      class: "",
     }
     // listeners
     // this.handleInputChange = this.handleInputChange.bind(this);
@@ -53,15 +56,25 @@ class CreateQuizPage extends Component {
     if (this.state.quizName === "") {
       alert("Quiz Name can not be empty!")
     } else {
+      this.state.questions.forEach(q => {
+        console.log(q.question);
+      })
       this.state.questions.forEach(question => {
         dbRef.child(question.question).set({
           optionOne: question.optionOne,
           optionTwo: question.optionTwo,
           optionThree: question.optionThree,
           optionFour: question.optionFour,
-          rightAnswer: question.rightAnswer
+          rightAnswer: question.rightAnswer,
         })
       })
+      // set admin to database with quiz
+      dbRef.child('info').set({
+        admin: this.props.email,
+        dueDate:this.state.dueDate,
+        class: this.state.class
+      })
+      // set class
     }
   }
   // adding a question to the list
@@ -176,8 +189,12 @@ class CreateQuizPage extends Component {
           <Form >
             <legend> Create A Quiz </legend>
             <text>Quiz Name</text>
-            <Input type="textarea" name="optionOne" placeholder="Quiz Name" style={{ width: "50%", height: "50%" }}
+            <Input type="textarea" name="question" placeholder="Quiz Name" style={{ width: "50%", height: "50%" }}
               onChange={(text) => this.setState({ quizName: text.target.value })} />
+            <Input type="textarea" name="dueDate" placeholder="Due Date (MM/DD/YYYY)" style={{ width: "50%", height: "10%" }}
+              onChange={(text) => this.setState({ dueDate: text.target.value })} />
+            <Input type="textarea" name="class" placeholder="Class" style={{ width: "50%", height: "10%" }}
+              onChange={(text) => this.setState({ class: text.target.value })} />
             <Button onClick={() => this.setState({ addPrompt: true })}>Add New Question</Button>
             <br />
             <br />
@@ -233,6 +250,7 @@ class CreateQuizPage extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.rLogin.isLoggedIn,
+    email: state.rUser.email,
     // questions:state.rQuiz.questions,
     // question:state.rQuiz.question,
     // optionOne:state.rQuiz.optionOne,

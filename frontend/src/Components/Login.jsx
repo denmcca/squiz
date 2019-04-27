@@ -26,7 +26,13 @@ class Login extends React.Component {
     componentDidMount() {
         this.authListener();
     }
+
     authListener() {
+        // let user = {
+        //     firstName: this.state.firstName,
+        //     lastName: this.state.lastName,
+        //     email: this.state.email
+        // }
         firebase.auth().onAuthStateChanged((user) => {
             console.log(user)
             if (user) {
@@ -47,6 +53,7 @@ class Login extends React.Component {
         });
         // store this in redux store
         if(localStorage.getItem('user') !== null){
+            this.props.setEmail(this.state.email);
             db.ref("account/" + localStorage.getItem('user') + '/userInfo')
             .once('value')
             .then((snapshot) =>
@@ -97,8 +104,7 @@ const mapDispatchToProps = (dispatch) => {
         // setUser: (user) => dispatch({type: 'SET_USER', value:user}),
         setFirstName: (fname) => dispatch({type: 'SET_FNAME', value:fname}),
         setLastName: (lname) => dispatch({type: 'SET_LNAME', value:lname}),
-        updateEmail: (email) => dispatch({ type: 'UPDATE_EMAIL', value:email }),
-        updatePassword: (password) => dispatch({ type: 'UPDATE_PASSWORD', value:password })
+        setEmail: (email) => dispatch({ type: 'SET_EMAIL', value:email }),
     }
 };
 
