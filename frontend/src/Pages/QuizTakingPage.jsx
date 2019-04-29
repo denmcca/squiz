@@ -17,7 +17,8 @@ import {
     ListGroupItem
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { db } from '../firebase'
+import { db } from '../firebase';
+import Questions from '../Components/Questions'
 export default class QuizTakingPage extends Component {
     constructor() {
         super();
@@ -60,9 +61,10 @@ export default class QuizTakingPage extends Component {
     fetchQuizData = async (quizName) => {
         alert("You have chosen to take " + quizName)
         // the database stores the grade under /account/user ID/grades
-        var dbRef = db.ref("/account/" + localStorage.getItem('user') + "/quizzes/" + quizName)
+        var dbRef = db.ref("/account/" + localStorage.getItem('user') + "/quizzes/" + quizName + '/questions')
         var questionsFromDB = []
         await dbRef.once("value", quiz => {
+            alert(JSON.stringify(quiz));
             // fetch the questions in the quiz
             quiz.forEach(question => {
                 // each question has multiple possible answers
@@ -123,6 +125,9 @@ export default class QuizTakingPage extends Component {
                             }
                         </Row>
                     </Form>
+                    <div>
+                        <Questions questions={this.state.questions} />
+                    </div>
                 </div>
             </div>
         );
