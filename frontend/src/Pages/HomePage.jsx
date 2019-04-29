@@ -20,42 +20,39 @@ class HomePage extends Component {
       courseCollapse: true
     }
   }
+  
   displayCourse() {
     this.setState({ courseCollapse: !this.state.courseCollapse });
   }
-    logout() {
-        firebase.auth().signOut();
-    }
 
   render() {
     return (
-        <div>
-      <Row style = {{marginLeft: 3, marginRight: 3}}>
-        {/* Courses list */}
-        <Col className="course-List">
-          <br />
-          <UserInfo />
-          <CourseList />
-        </Col>
-        {/* Recent Grades */}
-        <Col className="recent-Grades" xs = "2">
-          <br />
-          <RecentGrades />
-        </Col>
-        {/* Announcements */}
-        <Col className="announcements">
-          <br />
-          <Announcements />
-        </Col>
-        {/* Due Dates */}
-        <Col className="due-Dates">
-          <br />
-          <DueDatesTable />
-          {/* <DueDates /> */}
-        </Col>
-      </Row>
-            <button onClick={this.logout}>Logout</button>
-        </div>
+      <div>
+        <Row style={{ marginLeft: 3, marginRight: 3 }}>
+          {/* Courses list */}
+          <Col className="course-List">
+            <br />
+            <UserInfo />
+            <CourseList />
+          </Col>
+          {/* Recent Grades */}
+          <Col className="recent-Grades" xs="2">
+            <br />
+            <RecentGrades />
+          </Col>
+          {/* Announcements */}
+          <Col className="announcements">
+            <br />
+            <Announcements />
+          </Col>
+          {/* Due Dates */}
+          <Col className="due-Dates">
+            <br />
+            <DueDatesTable />
+            {/* <DueDates /> */}
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

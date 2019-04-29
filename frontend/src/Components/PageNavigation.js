@@ -26,7 +26,6 @@ class PageNavigation extends Component {
   }
   logOut(){
       firebase.auth().signOut();
-      alert("Logged off")
       this.props.logUserOut();
   }
   render() {

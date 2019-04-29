@@ -22,7 +22,7 @@ class Router extends React.Component {
     return(
       <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className='app-center'>
-        <div class="app-size">
+        <div className="app-size">
           <PageNavigation />
           <Switch>
           <Route exact path='/about' component={ AboutPage } />

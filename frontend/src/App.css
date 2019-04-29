@@ -67,23 +67,24 @@
 }
 
 .bg-size {
-  width: 94%; /* changes width of whole section */
-  height: 94%;
-  min-width: 100%;
+  width: 94vw; /* changes width of whole section */
+  height: 94vh;
+  min-width: auto;
   min-height: auto;
   align-self: center;
   background-image: url('./images/background_image.jpg');
-  background-size: 100% auto;
+  background-size: auto 100%;
+  background-position-x: 50%;
+  align-content: center;
   background-repeat: no-repeat;
   margin-left: 0;
   margin-right: 0;
-  
   align-content: space-between;
 }
 
 .app-size {
   width: 97vw; /* changes width of whole section */
-  height: 98vh;
+  height: 97vh;
   align-content: center;
 }
 
@@ -93,7 +94,7 @@
   border-radius: 1em;
   padding: 1em;
   position: absolute;
-  top: 49%;
+  top: 48%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%) 
@@ -140,4 +141,11 @@
 
 .navlink-format {
   padding-right: 10px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
