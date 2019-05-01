@@ -43,6 +43,7 @@ export default class QuizTakingPage extends Component {
 
     };
     this.toggle = this.toggle.bind(this);
+    this.message = this.message.bind(this);
   }
   toggle() {
     this.setState(prevState => ({
@@ -51,6 +52,10 @@ export default class QuizTakingPage extends Component {
   }
   componentDidMount() {
     this.fetchData();
+  }
+  message() {
+    alert(`You've successfully submitted the quiz!`)
+    this.toggle()
   }
   fetchData = async () => {
     // the database stores the grade under /account/user ID/grades
@@ -195,7 +200,6 @@ export default class QuizTakingPage extends Component {
             <ModalBody>
               {this.state.questions.map(question => (
                 <div>
-                  {console.log(question.optionOne)}
                   <form>
                     <label>{question.question}</label>
                     <br />
@@ -215,7 +219,7 @@ export default class QuizTakingPage extends Component {
               <Button color="secondary" onClick={this.toggle}>
                 Cancel
               </Button>{" "}
-              <Button color="success" onClick={this.toggle}>
+              <Button color="success" onClick={this.message}>
                 Submit Quiz
               </Button>
             </ModalFooter>
