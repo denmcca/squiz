@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
+import "../QuizTaking.css";
 import {
   Button,
   Form,
@@ -25,6 +26,7 @@ export default class QuizTakingPage extends Component {
     this.state = {
       test: "hello world!",
       quizList: [],
+      QuizName: "default value",
       // Reference on displaying questions
       // they are stored as a json after you click which quiz to take
       // stored as an array of json as shown below[example shown below is a list of one]:
@@ -36,7 +38,9 @@ export default class QuizTakingPage extends Component {
       questions: [], // one index, one question
       possibleAnswers: [], // four indexes, one question   (%4)
       rightAnswers: [], // one index, one question
-      modal: false
+      selectedAnswers: [], 
+      modal: false,
+
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -72,6 +76,7 @@ export default class QuizTakingPage extends Component {
     var dbRef = db.ref(
       "/account/" + localStorage.getItem("user") + "/quizzes/" + quizName
     );
+    this.setState({ QuizName: quizName })
     var questionsFromDB = [];
     await dbRef.once("value", quiz => {
       // fetch the questions in the quiz
@@ -167,6 +172,7 @@ export default class QuizTakingPage extends Component {
                                 this.state.quizList[idx].quizName
                               );
                             }}
+                            data-backdrop="static" data-keyboard="false"
                           >
                             {this.state.quizList[idx].quizName}
                           </Button>
@@ -183,9 +189,9 @@ export default class QuizTakingPage extends Component {
           <Modal
             isOpen={this.state.modal}
             toggle={this.toggle}
-            className={this.props.className}
+            className="modal"
           >
-            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+            <ModalHeader>{this.state.QuizName}</ModalHeader>
             <ModalBody>
               {this.state.questions.map(question => (
                 <div>
@@ -196,11 +202,10 @@ export default class QuizTakingPage extends Component {
                     {question.possibleAnswers.map(answer => 
                       <div>
                         <input type="radio" name="question" value={answer.possibleAnswer} />
-                        {answer.possibleAnswer}
-                        <br />
+                        {"      " + answer.possibleAnswer}
                       </div>
                     )}
-                    <br />
+                    <hr />
                   </form>
                 </div>
               ))}
