@@ -1,5 +1,5 @@
 # squiz
-Web-based quiz service
+Web-based quiz service developed with React.
 
 ## Installation
 
