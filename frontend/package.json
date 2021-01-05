@@ -6,7 +6,7 @@
   "author": "Carl Costa, Brandon Pitcher, Philip Poppler, Dennis McCannon, Ernest Arreola",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "firebase": "^5.9.4",
